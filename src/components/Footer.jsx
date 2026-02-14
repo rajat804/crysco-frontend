@@ -8,7 +8,7 @@ const Footer = () => {
 
         {/* Brand Section */}
         <div>
-          <h2 className="text-2xl font-bold text-emerald-700">WellnessPro</h2>
+          <h2 className="text-2xl font-bold text-emerald-700">Crysco</h2>
           <p className="mt-4 text-gray-600 leading-relaxed">
             Premium quality supplements crafted to enhance your health and
             performance naturally.
