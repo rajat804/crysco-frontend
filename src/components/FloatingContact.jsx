@@ -6,11 +6,10 @@ const FloatingContact = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-
       {/* WhatsApp Button */}
       {open && (
         <a
-          href="https://wa.me/7982190064"
+          href="https://wa.me/917982190064"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full shadow-lg hover:scale-105 transition duration-300"
@@ -23,7 +22,7 @@ const FloatingContact = () => {
       {/* Call Button */}
       {open && (
         <a
-          href="tel:+91 9990955454"
+          href="tel:+919990955454"
           className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-full shadow-lg hover:scale-105 transition duration-300"
         >
           <FaPhoneAlt />
@@ -38,7 +37,6 @@ const FloatingContact = () => {
       >
         <FaComments size={20} />
       </button>
-
     </div>
   );
 };
