@@ -8,12 +8,13 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navItems = [
-    "Mental Health",
-    "Gut Health",
-    "Men Health",
-    "Child Health",
-    "Women Health",
-    "Heart Health",
+    "Garbage Bags",
+    "Kitchen Towel",
+    "Kitchen Tissue",
+    "Bulk Order",
+    "About Us",
+    "Contact",
+
   ];
 
   return (
