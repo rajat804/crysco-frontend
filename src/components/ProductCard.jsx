@@ -1,7 +1,8 @@
+import { FaEye } from "react-icons/fa";
+
 const ProductCard = ({ product }) => {
   return (
     <div className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-emerald-100">
-
       {/* Discount Badge */}
       <span className="absolute top-4 left-4 z-10 bg-emerald-600 text-white text-xs font-semibold px-3 py-1 rounded-md shadow">
         Extra {product.discount}% OFF
@@ -9,7 +10,6 @@ const ProductCard = ({ product }) => {
 
       {/* Image Section */}
       <div className="relative h-72 bg-emerald-50 flex items-center justify-center overflow-hidden">
-
         <img
           src={product.image1}
           alt={product.name}
@@ -25,14 +25,12 @@ const ProductCard = ({ product }) => {
 
       {/* Content */}
       <div className="p-5">
-
         <h3 className="text-gray-800 font-semibold text-sm md:text-base uppercase tracking-wide group-hover:text-emerald-600 transition">
           {product.name}
         </h3>
 
         {/* Price Section */}
         <div className="mt-3 flex items-center gap-3 flex-wrap">
-
           <span className="text-xl font-bold text-gray-900">
             ₹{product.price}
           </span>
@@ -44,14 +42,24 @@ const ProductCard = ({ product }) => {
           <span className="text-emerald-600 text-sm font-semibold">
             {product.discount}% OFF
           </span>
-
         </div>
 
-        {/* Buy Button */}
-        <button className="mt-6 w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
-          BUY NOW
-        </button>
+        <div className="mt-6 flex gap-3">
+          {/* Buy Button */}
+          <button className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
+            BUY NOW
+          </button>
 
+          {/* View Product Icon Button */}
+          <button className="w-14 flex items-center justify-center border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-lg transition-all duration-300 transform hover:scale-110 shadow-md hover:shadow-lg group relative">
+            <FaEye className="text-lg transition-transform duration-300 group-hover:scale-125" />
+
+            {/* Tooltip */}
+            <span className="absolute -top-8 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-all duration-300">
+              View
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   );
