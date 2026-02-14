@@ -18,9 +18,9 @@ const Home = () => {
       <Header />
       <HeroBanner/>
       <TrustSection/>
+      <AmazingDeals/>
       <NewArrivals/>
       <PromoSection/>
-      <AmazingDeals/>
       <CustomerFeedback/>
       <PromoCTA/>
       <Footer/>
