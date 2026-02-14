@@ -1,0 +1,60 @@
+const ProductCard = ({ product }) => {
+  return (
+    <div className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-emerald-100">
+
+      {/* Discount Badge */}
+      <span className="absolute top-4 left-4 z-10 bg-emerald-600 text-white text-xs font-semibold px-3 py-1 rounded-md shadow">
+        Extra {product.discount}% OFF
+      </span>
+
+      {/* Image Section */}
+      <div className="relative h-72 bg-emerald-50 flex items-center justify-center overflow-hidden">
+
+        <img
+          src={product.image1}
+          alt={product.name}
+          className="absolute h-60 object-contain transition-all duration-500 group-hover:opacity-0 group-hover:scale-105"
+        />
+
+        <img
+          src={product.image2}
+          alt={product.name}
+          className="absolute h-60 object-contain opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:scale-105"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="p-5">
+
+        <h3 className="text-gray-800 font-semibold text-sm md:text-base uppercase tracking-wide group-hover:text-emerald-600 transition">
+          {product.name}
+        </h3>
+
+        {/* Price Section */}
+        <div className="mt-3 flex items-center gap-3 flex-wrap">
+
+          <span className="text-xl font-bold text-gray-900">
+            ₹{product.price}
+          </span>
+
+          <span className="line-through text-gray-400 text-sm">
+            ₹{product.oldPrice}
+          </span>
+
+          <span className="text-emerald-600 text-sm font-semibold">
+            {product.discount}% OFF
+          </span>
+
+        </div>
+
+        {/* Buy Button */}
+        <button className="mt-6 w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
+          BUY NOW
+        </button>
+
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;
