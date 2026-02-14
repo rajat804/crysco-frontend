@@ -14,8 +14,8 @@ import FloatingContact from "../components/FloatingContact";
 const Home = () => {
   return (
     <>
-      <TopBar />
-      <Header />
+      <TopBar/>
+      <Header/>
       <HeroBanner/>
       <TrustSection/>
       <AmazingDeals/>
