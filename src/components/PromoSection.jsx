@@ -20,7 +20,7 @@ const PromoSection = () => {
         {/* LEFT SIDE */}
         <div className="space-y-6">
           <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-            Discover Premium Wellness Products
+            Discover Premium Crysco Products
           </h1>
 
           <p className="text-lg md:text-xl text-gray-300">
