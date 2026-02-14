@@ -1,4 +1,12 @@
 import ProductCard from "./ProductCard";
+import img1 from "../assets/1.jpg";
+import img2 from "../assets/2.jpg";
+import img3 from "../assets/3.jpg";
+import img4 from "../assets/4.jpg";
+import img5 from "../assets/yello1.jpg";
+import img6 from "../assets/yello2.jpg";
+import img7 from "../assets/9.jpg";
+import img8 from "../assets/6.jpg";
 
 const products = [
   {
@@ -7,10 +15,8 @@ const products = [
     price: 899,
     oldPrice: 1899,
     discount: 52,
-    image1:
-      "https://images.unsplash.com/photo-1580281657527-47f249e8f21c?auto=format&fit=crop&w=600&q=80",
-    image2:
-      "https://images.unsplash.com/photo-1628771065518-0d82f1938462?auto=format&fit=crop&w=600&q=80",
+    image1:img1,
+    image2: img2,
   },
   {
     id: 2,
@@ -18,10 +24,8 @@ const products = [
     price: 799,
     oldPrice: 1599,
     discount: 50,
-    image1:
-      "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=600&q=80",
-    image2:
-      "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=80",
+    image1: img3,
+    image2: img4,
   },
   {
     id: 3,
@@ -29,10 +33,8 @@ const products = [
     price: 699,
     oldPrice: 1299,
     discount: 46,
-    image1:
-      "https://images.unsplash.com/photo-1590080877777-95b7c7e9d12f?auto=format&fit=crop&w=600&q=80",
-    image2:
-      "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=600&q=80",
+    image1:img5,
+    image2:img6,
   },
   {
     id: 4,
@@ -40,10 +42,8 @@ const products = [
     price: 599,
     oldPrice: 1199,
     discount: 50,
-    image1:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80",
-    image2:
-      "https://images.unsplash.com/photo-1628771065403-5ec1f3c98a42?auto=format&fit=crop&w=600&q=80",
+    image1: img7,
+    image2:img8,
   },
   {
     id: 5,
@@ -51,10 +51,8 @@ const products = [
     price: 499,
     oldPrice: 999,
     discount: 50,
-    image1:
-      "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=80",
-    image2:
-      "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=600&q=80",
+    image1: img1,
+    image2: img2,
   },
   {
     id: 6,
@@ -62,10 +60,8 @@ const products = [
     price: 1299,
     oldPrice: 1999,
     discount: 35,
-    image1:
-      "https://images.unsplash.com/photo-1603398938378-7e6b7d6e6f3b?auto=format&fit=crop&w=600&q=80",
-    image2:
-      "https://images.unsplash.com/photo-1599058917212-d750089bc07b?auto=format&fit=crop&w=600&q=80",
+    image1: img3,
+    image2: img4,
   },
   {
     id: 7,
@@ -73,10 +69,8 @@ const products = [
     price: 899,
     oldPrice: 1499,
     discount: 40,
-    image1:
-      "https://images.unsplash.com/photo-1628771065403-5ec1f3c98a42?auto=format&fit=crop&w=600&q=80",
-    image2:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?auto=format&fit=crop&w=600&q=80",
+    image1: img5,
+    image2: img6,
   },
   {
     id: 8,
@@ -84,10 +78,8 @@ const products = [
     price: 699,
     oldPrice: 1399,
     discount: 50,
-    image1:
-      "https://images.unsplash.com/photo-1580281657527-47f249e8f21c?auto=format&fit=crop&w=600&q=80",
-    image2:
-      "https://images.unsplash.com/photo-1628771065518-0d82f1938462?auto=format&fit=crop&w=600&q=80",
+    image1: img7,
+    image2: img8,
   },
 ];
 
