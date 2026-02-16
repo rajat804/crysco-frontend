@@ -1,4 +1,3 @@
-import React from "react";
 import ProductCard from "../components/ProductCard";
 import kitchenBanner from "../assets/kitchenTowelBanner.png";
 import kitchenTowel1 from "../assets/3.jpg";
