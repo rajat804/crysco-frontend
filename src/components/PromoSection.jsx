@@ -1,11 +1,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-
 import v1 from "../assets/video1.mp4";
 import v2 from "../assets/video2.mp4";
 import v3 from "../assets/video3.mp4";
@@ -13,10 +11,8 @@ import v4 from "../assets/video4.mp4";
 
 const PromoSection = () => {
   return (
-    <section className="relative min-h-[85vh] flex items-center bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white px-6 md:px-16 py-12 overflow-hidden">
-      
+    <section className="relative min-h-[85vh] flex items-center bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white   px-6 md:px-16 py-12 overflow-hidden">
       <div className="grid md:grid-cols-2 gap-12 items-center w-full">
-        
         {/* LEFT SIDE */}
         <div className="space-y-6">
           <h1 className="text-4xl md:text-6xl font-bold leading-tight">
@@ -41,7 +37,6 @@ const PromoSection = () => {
 
         {/* RIGHT SIDE - VIDEO SWIPER */}
         <div className="relative">
-          
           {/* Custom Buttons */}
           <div className="absolute top-1/2 -left-5 z-20 transform -translate-y-1/2">
             <button className="swiper-button-prev-custom bg-white/20 backdrop-blur-md p-3 rounded-full hover:bg-emerald-600 transition duration-300">
