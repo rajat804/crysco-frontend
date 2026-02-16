@@ -4,10 +4,8 @@ import kitchenTowel1 from "../assets/3.jpg";
 import kitchenTowel2 from "../assets/4.jpg";
 
 const KitchenTowel = () => {
-  // Hero banner image URL
-  const heroImageUrl = kitchenBanner; // replace with your kitchen towel image
+  const heroImageUrl = kitchenBanner;
 
-  // Dummy product data
   const product = {
     name: "Premium Kitchen Towel",
     price: 199,
@@ -17,6 +15,8 @@ const KitchenTowel = () => {
     image2: kitchenTowel2,
   };
 
+  const products = [product, product, product]; // can be replaced with different products
+
   return (
     <>
       {/* Hero Banner */}
@@ -24,20 +24,16 @@ const KitchenTowel = () => {
         className="relative w-full h-[70vh] flex items-center justify-center bg-cover bg-center"
         style={{ backgroundImage: `url('${heroImageUrl}')` }}
       >
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black/40"></div>
-
-        {/* Title */}
-        {/* <h1 className="relative text-white text-4xl md:text-6xl font-bold text-center px-4">
+        <h1 className="relative text-white text-4xl md:text-6xl font-bold text-center px-4">
           Kitchen Towels
-        </h1> */}
+        </h1>
       </section>
 
       {/* Page Content */}
       <section className="max-w-6xl mx-auto p-6">
         <p className="text-gray-700 text-lg md:text-xl leading-relaxed text-center">
-          Discover our high-quality Kitchen Towels — soft, absorbent, and
-          perfect for all your kitchen needs.
+          Discover our high-quality Kitchen Towels — soft, absorbent, and perfect for all your kitchen needs.
         </p>
       </section>
 
@@ -48,10 +44,9 @@ const KitchenTowel = () => {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {/* Render ProductCard */}
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-          <ProductCard product={product} />
+          {products.map((p, index) => (
+            <ProductCard key={index} product={p} />
+          ))}
         </div>
       </section>
     </>
