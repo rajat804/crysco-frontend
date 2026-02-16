@@ -5,31 +5,34 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+import inner1 from "../assets/kitchenTissueRollBanner.png";
+import inner2 from "../assets/garbageBagsBanner.png";
+import inner3 from "../assets/kitchenTowelBanner.png";
+
 const slides = [
   {
-    image:
-      "https://images.unsplash.com/photo-1584367369853-5c5a7bfa6a54",
-    title: "Boost Your Immunity",
-    subtitle: "Premium health supplements for daily wellness",
+    image: inner1,
+    title: "Clean & Fresh Kitchens Every Day",
+    subtitle:
+      "Experience the joy of a spotless kitchen with our premium quality kitchen tissue rolls that make your daily cleaning effortless and hygienic.",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2",
-    title: "Mental Wellness Matters",
-    subtitle: "Support focus & stress relief naturally",
+    image: inner2,
+    title: "Eco-Friendly Garbage Bags for a Greener Home",
+    subtitle:
+      "Keep your home neat and tidy while caring for the environment with our durable and reliable garbage bags designed for every household need.",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f",
-    title: "Heart Care Essentials",
-    subtitle: "Keep your heart healthy & strong",
+    image: inner3,
+    title: "Soft, Strong, and Absorbent Kitchen Towels",
+    subtitle:
+      "Make your everyday chores easier and more enjoyable with our high-quality kitchen towels that combine softness, strength, and superior absorbency.",
   },
 ];
 
 const HeroBanner = () => {
   return (
     <div className="w-full">
-
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
