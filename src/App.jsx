@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import GarbageBags from "./pages/GarbageBags";
 import KitchenTowel from "./pages/KitchenTowel";
 import BulkOrder from "./pages/BulkOrder";
-import AboutUs from "./pages/Aboutus";
+import AboutUs from "./pages/AboutUs";
 import ContactPage from "./pages/ContactPage";
 
 function App() {
