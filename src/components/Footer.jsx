@@ -50,10 +50,10 @@ const Footer = () => {
             Categories
           </h3>
           <ul className="space-y-3 text-gray-600">
-            <li className="hover:text-emerald-600 cursor-pointer transition">Protein</li>
-            <li className="hover:text-emerald-600 cursor-pointer transition">Vitamins</li>
-            <li className="hover:text-emerald-600 cursor-pointer transition">Fitness</li>
-            <li className="hover:text-emerald-600 cursor-pointer transition">Accessories</li>
+            <li className="hover:text-emerald-600 cursor-pointer transition">Garbage Bags</li>
+            <li className="hover:text-emerald-600 cursor-pointer transition">Kitchen Towel</li>
+            <li className="hover:text-emerald-600 cursor-pointer transition">Kitchen Tissue</li>
+            {/* <li className="hover:text-emerald-600 cursor-pointer transition">Accessories</li> */}
           </ul>
         </div>
 
@@ -63,8 +63,8 @@ const Footer = () => {
             Contact Us
           </h3>
           <ul className="space-y-3 text-gray-600">
-            <li>Email: support@wellnesspro.com</li>
-            <li>Phone: +91 98765 43210</li>
+            <li>Email: info@cryscoindia.com, sales@cryscoindia.com</li>
+            <li>Phone: +91-9990955454, +91-9990955454</li>
             <li>Location: India</li>
           </ul>
         </div>
