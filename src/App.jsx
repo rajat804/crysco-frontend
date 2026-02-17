@@ -9,6 +9,8 @@ import KitchenTowel from "./pages/KitchenTowel";
 import BulkOrder from "./pages/BulkOrder";
 import AboutUs from "./pages/AboutUs";
 import ContactPage from "./pages/ContactPage";
+import ProductDetails from "./pages/ProductDetails";
+import Customized from "./pages/Customized";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path="/bulk-order" element={<BulkOrder/>}></Route>
         <Route path="/about" element={<AboutUs/>}></Route>
         <Route path="/contact" element={<ContactPage/>}></Route>
+        <Route path="/product-details" element={<ProductDetails/>}></Route>
+        <Route path="/customized" element={<Customized/>}></Route>
         {/* Catch-all route for 404 */}
         <Route path="*" element={<h1 className="text-center mt-10">Page Not Found</h1>} />
       </Routes>
