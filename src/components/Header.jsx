@@ -7,7 +7,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navItems = [
-    {name: "Home", path: "/"},
+    { name: "Home", path: "/" },
     { name: "Garbage Bags", path: "/garbage-bags" },
     { name: "Kitchen Towel", path: "/kitchen-towel" },
     { name: "Kitchen Tissue", path: "/kitchen-tissue" },
@@ -18,10 +18,8 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-[#F9FAFB] shadow-sm">
-      
       {/* TOP SECTION */}
       <div className="flex items-center justify-between px-4 md:px-10 py-4">
-        
         {/* Hamburger */}
         <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X /> : <Menu />}
@@ -52,8 +50,12 @@ const Header = () => {
 
         {/* Icons */}
         <div className="flex items-center gap-5">
-          <User className="cursor-pointer text-gray-700 hover:text-emerald-600 transition" />
+          {/* Login Icon */}
+          <NavLink to="/login">
+            <User className="cursor-pointer text-gray-700 hover:text-emerald-600 transition" />
+          </NavLink>
 
+          {/* Cart */}
           <div className="relative cursor-pointer">
             <ShoppingBag className="text-gray-700 hover:text-emerald-600 transition" />
             <span className="absolute -top-2 -right-2 bg-emerald-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
