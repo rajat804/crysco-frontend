@@ -36,7 +36,7 @@ function App() {
         {/* ADMIN ROUTES (NO HEADER / FOOTER) */}
         <Route path="/admin" element={<AdminLayout/>}>
           <Route path="login" element={<AdminLogin/>}/>
-          <Route path="register-admin" element={<AdminRegister/>}/>
+          <Route path="register" element={<AdminRegister/>}/>
           <Route path="dashboard" element={<Dashboard/>}/>
         </Route>
 
