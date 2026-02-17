@@ -73,12 +73,7 @@ const AdminLogin = () => {
           </button>
         </form>
 
-        <p className="text-center text-gray-400 mt-6">
-          No admin account?{" "}
-          <Link to="/admin/register" className="text-emerald-400 hover:underline">
-            Register
-          </Link>
-        </p>
+        
 
       </div>
     </div>
