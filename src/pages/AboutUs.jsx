@@ -1,188 +1,391 @@
 import React from "react";
-import garbageImg from "../assets/yello3.jpg";
-import kitchenTowelImg from "../assets/3.jpg";
-import KitchenTissueImg from "../assets/9.jpg";
-import bulkImg from "../assets/6.jpg";
+import { motion } from "framer-motion";
+import { Package as PackageIcon, Factory, ShieldCheck, Award, Truck, Leaf } from "lucide-react";
+import assets from "../assets/assets"
 
 
-
-const products = [
-  {
-    name: "Garbage Bags",
-    description:
-      "Durable, eco-friendly garbage bags designed for home and office use. Strong and reliable for everyday needs.",
-    image: garbageImg,
-    link: "/garbage-bags",
-  },
-  {
-    name: "Kitchen Towel",
-    description:
-      "Soft and absorbent kitchen towels that make cleaning effortless, hygienic, and fast.",
-    image: kitchenTowelImg,
-    link: "/kitchen-towel",
-  },
-  {
-    name: "Kitchen Tissue Roll",
-    description:
-      "Premium quality kitchen tissue rolls for daily use, strong and hygienic for all purposes.",
-    image: KitchenTissueImg,
-    link: "/kitchen-tissue",
-  },
-  {
-    name: "Bulk Order",
-    description:
-      "Flexible bulk order options for businesses, restaurants, or large households. Quick delivery guaranteed.",
-    image: bulkImg,
-    link: "/bulk-order",
-  },
-];
-
-// Testimonials
-const testimonials = [
-  {
-    name: "Anita Singh",
-    review:
-      "Excellent quality products and timely delivery! Their kitchen towels and garbage bags are my go-to now.",
-  },
-  {
-    name: "Rohit Verma",
-    review:
-      "I placed a bulk order for my office and the service was outstanding. Highly recommended!",
-  },
-  {
-    name: "Neha Sharma",
-    review:
-      "Premium quality kitchen tissue and towels. They really make daily cleaning so easy!",
-  },
-];
+// Fade-up animation for motion
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const AboutUs = () => {
   return (
-    <div className="w-full">
-      {/* HERO BANNER */}
-      <div
-        className="w-full h-[350px] md:h-[450px] bg-cover bg-center flex items-center justify-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1582719478170-6f20c0735c4c?fit=crop&w=1400&q=80')",
-        }}
-      >
-        <div className="bg-black bg-opacity-50 p-6 rounded text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-3">
-            About Us
-          </h1>
-          <p className="text-white text-lg md:text-2xl">
-            Delivering high-quality kitchen and household products with care.
+    <>
+      {/* ================= HERO SECTION ================= */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100 py-24">
+        {/* Decorative background shapes */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 left-10 w-40 h-40 bg-teal-200/40 rounded-full blur-3xl" />
+          <div className="absolute bottom-32 right-20 w-56 h-56 bg-cyan-200/40 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-pink-200/30 rounded-full blur-2xl" />
+        </div>
+
+        {/* Floating strokes */}
+        <div className="absolute inset-0 pointer-events-none">
+          <span className="absolute top-24 left-1/4 w-40 h-[6px] bg-teal-300/30 rotate-45 rounded-full" />
+          <span className="absolute bottom-32 right-1/4 w-32 h-[6px] bg-cyan-300/30 -rotate-45 rounded-full" />
+          <span className="absolute top-1/3 right-16 w-20 h-[6px] bg-rose-300/30 rotate-12 rounded-full" />
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-3 gap-16 items-center">
+            {/* Left Images */}
+            <div className="hidden lg:flex flex-col gap-10 items-end">
+              <img
+                src={assets.garbageImg}
+                alt="Garbage Bags"
+                className="w-40 rounded-xl shadow-xl hover:-translate-y-2 transition-transform duration-300"
+              />
+              <img
+                src={assets.kitchenTowelImg}
+                alt="Kitchen Towels"
+                className="w-32 rounded-xl shadow-xl hover:translate-y-2 transition-transform duration-300"
+              />
+            </div>
+
+            {/* Center Content */}
+            <div className="text-center">
+              <p className="text-teal-600 font-semibold tracking-widest mb-3">ABOUT US</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+                Trusted Plastic & Flexible <span className="text-teal-500">Packaging Experts</span>
+              </h2>
+              <p className="mt-6 text-slate-600 text-base sm:text-lg leading-relaxed">
+                We are a highly established and reputable plastic & flexible packaging company, delivering innovative, reliable, and scalable solutions since 1985.
+              </p>
+              <p className="mt-4 text-slate-600 leading-relaxed">
+                Our products cater to industries including food & beverages, apparel, agro-chemicals, pet foods, cosmetics, automobiles, confectionery, and pharmaceuticals.
+              </p>
+            </div>
+
+            {/* Right Images */}
+            <div className="hidden lg:flex flex-col gap-10 items-start">
+              <img
+                src={assets.KitchenTissueImg}
+                alt="Tissue Products"
+                className="w-36 rounded-xl shadow-xl hover:-translate-y-2 transition-transform duration-300"
+              />
+              <img
+                src={assets.bulkImg}
+                alt="Bulk Orders"
+                className="w-44 rounded-xl shadow-xl hover:translate-y-2 transition-transform duration-300"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= PRODUCT PILLARS ================= */}
+      <section className="bg-slate-50 py-28">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            transition={{ duration: 0.6 }}
+            className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-20"
+          >
+            What We Specialize In
+          </motion.h2>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            {[
+              { icon: PackageIcon, title: "Plastic Bags", desc: "High-strength plastic bags for retail, food packaging, and industrial use." },
+              { icon: Factory, title: "Towels", desc: "Soft, absorbent towels ideal for hospitality, healthcare, and personal use." },
+              { icon: ShieldCheck, title: "Tissue Products", desc: "Hygienically manufactured tissue products meeting strict quality standards." },
+            ].map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+                className="bg-white rounded-3xl p-10 shadow-sm hover:shadow-2xl transition-transform duration-300 group"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <item.icon size={28} />
+                </div>
+                <h3 className="text-xl font-semibold text-slate-900 mb-3">{item.title}</h3>
+                <p className="text-slate-600">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= WHY TRUST US ================= */}
+      <section className="py-28">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-20"
+          >
+            Why Businesses Trust Us
+          </motion.h2>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+            {[
+              { icon: Award, text: "Consistent Quality" },
+              { icon: ShieldCheck, text: "Hygiene & Safety" },
+              { icon: Truck, text: "Reliable Delivery" },
+              { icon: Leaf, text: "Responsible Manufacturing" },
+            ].map((item, i) => (
+              <motion.div
+                key={item.text}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center bg-white border border-slate-200 rounded-2xl p-8 hover:border-teal-500 hover:shadow-lg transition-transform duration-300"
+              >
+                <item.icon size={32} className="mx-auto mb-4 text-teal-600" />
+                <p className="font-medium text-slate-700">{item.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= VISION ================= */}
+      <section className="bg-gradient-to-r from-slate-900 to-slate-800 text-white py-28">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          transition={{ duration: 0.7 }}
+          className="max-w-5xl mx-auto px-6 text-center"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Vision</h2>
+          <p className="text-slate-300 text-lg leading-relaxed">
+            To become a leading and trusted brand in plastic packaging and hygiene products by delivering value-driven solutions, innovation, and consistent quality — every single day.
           </p>
+        </motion.div>
+      </section>
+
+      <section className="bg-white">
+
+      {/* ================= IMAGE EXPERIENCE ================= */}
+      <div className="w-full">
+
+        {/* HERO HORIZONTAL IMAGE */}
+        <div className="relative w-full overflow-hidden">
+          <img
+            src={assets.image2}
+            alt="Production Hero"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute bottom-10 left-10 text-white max-w-xl">
+            <h2 className="text-3xl sm:text-4xl font-bold">
+              Inside Our Production
+            </h2>
+            <p className="mt-3 text-slate-200">
+              Precision, scale, and quality built into every process.
+            </p>
+          </div>
+        </div>
+
+        {/* SPLIT IMAGE STORY */}
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-stretch">
+
+            {/* LEFT – VERTICAL IMAGE */}
+            <div className="lg:col-span-1 h-[70vh] overflow-hidden rounded-3xl">
+              <img
+                src={assets.image1}
+                alt="Production"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* CENTER – TEXT BLOCK */}
+            <div className="flex flex-col justify-center px-4">
+              <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                Manufacturing at Scale
+              </h3>
+              <p className="mt-6 text-slate-600 leading-relaxed">
+                Our facilities are designed to handle large-scale production
+                while maintaining strict quality standards. Every stage is
+                optimized for efficiency, hygiene, and consistency.
+              </p>
+            </div>
+
+            {/* RIGHT – STACKED IMAGES */}
+            <div className="flex flex-col gap-6">
+              <div className="h-[32vh] rounded-3xl overflow-hidden">
+                <img
+                  src={assets.image3}
+                  alt="Production"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="h-[32vh] rounded-3xl overflow-hidden">
+                <img
+                  src={assets.image4}
+                  alt="Production"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto py-12 px-4 space-y-16">
-        {/* BRAND STORY */}
-        <div className="text-center space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-            Our Story
-          </h2>
-          <p className="text-gray-700 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-            Founded with a vision to make daily household chores easier and cleaner, our brand focuses on providing top-quality garbage bags, kitchen towels, kitchen tissue rolls, and flexible bulk order solutions. We have built our reputation on trust, reliability, and attention to detail. Every product is carefully sourced and designed to meet the highest standards of quality.
-          </p>
-          <p className="text-gray-700 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-            We serve thousands of households, restaurants, and businesses, helping them maintain cleanliness and convenience in daily life. Our mission is to combine functionality, durability, and eco-friendliness in every product.
-          </p>
-        </div>
+      {/* ================= VIDEO EXPERIENCE ================= */}
+      <div className="w-full bg-slate-900 text-white">
 
-        {/* MISSION & VISION */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded shadow hover:shadow-lg transition">
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">Our Mission</h3>
-            <p className="text-gray-700">
-              To provide reliable, durable, and eco-friendly kitchen and household products that simplify daily tasks for every home and business.
-            </p>
-          </div>
-          <div className="bg-white p-6 rounded shadow hover:shadow-lg transition">
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">Our Vision</h3>
-            <p className="text-gray-700">
-              To become the most trusted household products brand known for quality, reliability, and customer satisfaction across India.
+        {/* VIDEO STRIP 1 */}
+        <div className="relative w-full h-[70vh] overflow-hidden">
+          <video
+            src={assets.video1}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute bottom-10 left-10 max-w-xl">
+            <h3 className="text-3xl font-bold">Automated Processes</h3>
+            <p className="mt-3 text-slate-300">
+              High-speed, precision-driven production lines.
             </p>
           </div>
         </div>
 
-        {/* WHY CHOOSE US */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div className="bg-[#06B6D4] text-white p-6 rounded shadow text-center hover:scale-105 transition">
-            <h3 className="font-bold text-xl mb-2">Premium Quality</h3>
-            <p>Durable, tested products for everyday household needs.</p>
-          </div>
-          <div className="bg-[#0EA5E9] text-white p-6 rounded shadow text-center hover:scale-105 transition">
-            <h3 className="font-bold text-xl mb-2">Eco-Friendly</h3>
-            <p>Environmentally responsible products designed to minimize waste.</p>
-          </div>
-          <div className="bg-[#0284C7] text-white p-6 rounded shadow text-center hover:scale-105 transition">
-            <h3 className="font-bold text-xl mb-2">Customer Satisfaction</h3>
-            <p>We prioritize your satisfaction and provide the best support.</p>
-          </div>
-        </div>
+        {/* VIDEO GRID STRIP */}
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 py-24">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-        {/* PRODUCTS GRID */}
-        <div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">
-            Our Products
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-            {products.map((product, index) => (
-              <a
-                key={index}
-                href={product.link}
-                className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-all duration-300"
-              >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
-                  <h3 className="text-xl font-bold text-white mb-2">{product.name}</h3>
-                  <p className="text-gray-200 text-sm">{product.description}</p>
+            {[assets.video2, assets.video3, assets.video4].map(
+              (video, index) => (
+                <div
+                  key={index}
+                  className="h-[45vh] rounded-3xl overflow-hidden bg-black"
+                >
+                  <video
+                    src={video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-              </a>
-            ))}
+              )
+            )}
+
           </div>
         </div>
+      </div>
 
-        {/* TESTIMONIALS */}
-        <div className="mt-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">
-            What Our Customers Say
+      {/* ================= NEW CERTIFICATES SECTION ================= */}
+      <section className="py-20 bg-gradient-to-b from-white to-slate-50">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          <h2 className="text-4xl sm:text-5xl font-bold text-center text-slate-900 mb-16">
+            Certificates
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((item, index) => (
-              <div key={index} className="bg-white p-6 rounded shadow hover:shadow-lg transition">
-                <p className="text-gray-700 mb-4">"{item.review}"</p>
-                <h3 className="font-semibold text-gray-800">{item.name}</h3>
+
+          {/* Big Certificate Image - Fully Responsive */}
+          <div className="w-full max-w-5xl mx-auto mb-16">
+            <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+              <img
+                src={assets.certificate} // Replace with your actual certificate image in assets
+                alt="Company Certificate"
+                className="w-full h-auto object-contain bg-white"
+              />
+            </div>
+          </div>
+
+          {/* Contact & Address Information - Beautifully Styled */}
+          <div className="max-w-4xl mx-auto text-center space-y-10">
+            <div>
+              <p className="text-lg font-semibold text-slate-700">Factory Address:</p>
+              <p className="mt-2 text-xl text-slate-900">
+                Plot No.27 Gali No.3 Rajendra Nagar Industrial Area<br />
+                Ghaziabad U.P. 201007
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100">
+                <h4 className="text-2xl font-bold text-slate-900 mb-4">
+                  Contact For Sales Inquiry
+                </h4>
+                <p className="text-lg text-slate-700">
+                  Name: <span className="font-semibold">Satish Kumar</span>
+                </p>
+                <p className="mt-3 text-lg text-slate-700">
+                  Contact: <span className="font-semibold">+91-9990955454</span><br />
+                  <span className="text-sm text-slate-500">(Call & WhatsApp)</span>
+                </p>
               </div>
-            ))}
+
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100">
+                <h4 className="text-2xl font-bold text-slate-900 mb-4">
+                  Contact For Delivery & Order Confirmation Inquiry
+                </h4>
+                <p className="text-lg text-slate-700">
+                  Contact: <span className="font-semibold">+91-7982190064</span><br />
+                  <span className="text-sm text-slate-500">(Call & WhatsApp)</span>
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-12">
+              <p className="text-lg font-semibold text-slate-700 mb-4">
+                Indiamart Profile Link
+              </p>
+              <a
+                href="https://www.indiamart.com/trikaya-fashion-india/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-10 py-4 bg-orange-600 text-white font-semibold rounded-full hover:bg-orange-700 transition duration-300 shadow-lg"
+              >
+                Visit Indiamart Profile →
+              </a>
+              <p className="mt-6 text-lg text-slate-600">
+                For Order Bulk & Sample
+              </p>
+            </div>
           </div>
         </div>
-
-        {/* CALL TO ACTION */}
-        <div className="text-center mt-12 mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
-            Place Your Order Today
-          </h2>
-          <p className="text-gray-700 mb-6 text-lg">
-            Chat with us directly on WhatsApp to order your preferred products or bulk items.
-          </p>
-          <a
-            href="https://wa.me/917982190064?text=Hello!%20I%20want%20to%20place%20an%20order%20or%20know%20more%20about%20your%20products."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-6 py-3 bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white font-semibold rounded hover:opacity-90 transition"
+      </section>
+    </section>
+    {/* ================= FINAL CTA ================= */}
+      <section className="bg-slate-900 py-24 text-white">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold mb-6"
           >
-            Chat on WhatsApp
+            Ready for Bulk Supply or Partnership?
+          </motion.h2>
+
+          <p className="text-slate-300 max-w-3xl mx-auto mb-10">
+            After reviewing samples or if you already know your needs — connect with 
+            our sales team for best pricing, MOQ, and delivery terms.
+          </p>
+
+          <a
+            href="/contact"
+            className="inline-flex px-8 py-3.5 rounded-full bg-teal-600 hover:bg-teal-700 transition font-semibold shadow-sm"
+          >
+            Talk to Sales Team
           </a>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
