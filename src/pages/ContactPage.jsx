@@ -146,8 +146,9 @@ const ContactPage = () => {
                 href="tel:+917982190064"
                 className="text-cyan-500 font-medium hover:underline"
               >
-                +91-9990955454
-              </a>{", "}
+                +91-7982190064
+              </a>
+              {", "}
               <a
                 href="tel:+919990955454"
                 className="text-cyan-500 font-medium hover:underline"
@@ -162,18 +163,20 @@ const ContactPage = () => {
                 href="mailto:info@cryscoindia.com"
                 className="text-cyan-500 font-medium hover:underline"
               >
-                 info@cryscoindia.com 
-              </a>{", "}
+                info@cryscoindia.com
+              </a>
+              {", "}
               <a
                 href="mailto:sales@cryscoindia.com"
                 className="text-cyan-500 font-medium hover:underline"
               >
-                 sales@cryscoindia.com 
+                sales@cryscoindia.com
               </a>
             </p>
 
             <p className="text-gray-700">
-              <strong>Address:</strong> Plot No.27 Gali No.3 Rajendra Nagar Industrial Area Ghaziabad Uttar Pradesh 201007
+              <strong>Address:</strong> Plot No.27 Gali No.3 Rajendra Nagar
+              Industrial Area Ghaziabad Uttar Pradesh 201007
             </p>
 
             {/* WhatsApp Button */}
@@ -187,6 +190,90 @@ const ContactPage = () => {
             </a>
           </div>
         </div>
+      </div>
+
+      {/* bulk order form */}
+      <div className="bg-gray-100">
+      <div className="max-w-4xl mx-auto py-12 px-4">
+        <h2 className="text-3xl font-bold mb-6 text-center">Bulk Order Form</h2>
+
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white p-8 rounded shadow-lg space-y-4"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="p-3 border rounded focus:ring-2 focus:ring-[#06B6D4]"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="p-3 border rounded focus:ring-2 focus:ring-[#06B6D4]"
+            />
+            <input
+              type="text"
+              name="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              className="p-3 border rounded focus:ring-2 focus:ring-[#06B6D4]"
+            />
+            <input
+              type="text"
+              name="product"
+              placeholder="Product Name"
+              value={formData.product}
+              onChange={handleChange}
+              required
+              className="p-3 border rounded focus:ring-2 focus:ring-[#06B6D4]"
+            />
+            <input
+              type="text"
+              name="size"
+              placeholder="Product Size"
+              value={formData.size}
+              onChange={handleChange}
+              required
+              className="p-3 border rounded focus:ring-2 focus:ring-[#06B6D4]"
+            />
+            <input
+              type="number"
+              name="quantity"
+              placeholder="Quantity"
+              value={formData.quantity}
+              onChange={handleChange}
+              required
+              className="p-3 border rounded focus:ring-2 focus:ring-[#06B6D4]"
+            />
+          </div>
+
+          <textarea
+            name="message"
+            placeholder="Additional Message (optional)"
+            value={formData.message}
+            onChange={handleChange}
+            className="w-full p-3 border rounded h-32 focus:ring-2 focus:ring-[#06B6D4]"
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white py-3 rounded font-semibold hover:opacity-90 transition"
+          >
+            Submit Bulk Order via WhatsApp
+          </button>
+        </form>
+      </div>
       </div>
     </div>
   );
