@@ -3,15 +3,12 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-r from-emerald-50 via-teal-50 to-sky-50 pt-16 pb-8 border-t">
-
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
-
         {/* Brand Section */}
         <div>
           <h2 className="text-2xl font-bold text-emerald-700">Crysco</h2>
           <p className="mt-4 text-gray-600 leading-relaxed">
-            Premium quality supplements crafted to enhance your health and
-            performance naturally.
+            Crysco India specializes in manufacturing high-quality garbage bags and biohazard waste bags designed for safe, hygienic, and efficient waste disposal across hotels, hospitals, offices, and households.
           </p>
 
           {/* Social Icons */}
@@ -37,10 +34,18 @@ const Footer = () => {
             Quick Links
           </h3>
           <ul className="space-y-3 text-gray-600">
-            <li className="hover:text-emerald-600 cursor-pointer transition">Home</li>
-            <li className="hover:text-emerald-600 cursor-pointer transition">Shop</li>
-            <li className="hover:text-emerald-600 cursor-pointer transition">New Arrivals</li>
-            <li className="hover:text-emerald-600 cursor-pointer transition">Contact</li>
+            <li className="hover:text-emerald-600 cursor-pointer transition">
+              Home
+            </li>
+            <li className="hover:text-emerald-600 cursor-pointer transition">
+              Shop
+            </li>
+            <li className="hover:text-emerald-600 cursor-pointer transition">
+              New Arrivals
+            </li>
+            <li className="hover:text-emerald-600 cursor-pointer transition">
+              Contact
+            </li>
           </ul>
         </div>
 
@@ -50,9 +55,15 @@ const Footer = () => {
             Categories
           </h3>
           <ul className="space-y-3 text-gray-600">
-            <li className="hover:text-emerald-600 cursor-pointer transition">Garbage Bags</li>
-            <li className="hover:text-emerald-600 cursor-pointer transition">Kitchen Towel</li>
-            <li className="hover:text-emerald-600 cursor-pointer transition">Kitchen Tissue</li>
+            <li className="hover:text-emerald-600 cursor-pointer transition">
+              Garbage Bags
+            </li>
+            <li className="hover:text-emerald-600 cursor-pointer transition">
+              Kitchen Towel
+            </li>
+            <li className="hover:text-emerald-600 cursor-pointer transition">
+              Kitchen Tissue
+            </li>
             {/* <li className="hover:text-emerald-600 cursor-pointer transition">Accessories</li> */}
           </ul>
         </div>
@@ -64,18 +75,19 @@ const Footer = () => {
           </h3>
           <ul className="space-y-3 text-gray-600">
             <li>Email: info@cryscoindia.com, sales@cryscoindia.com</li>
-            <li>Phone: +91-9990955454, +91-9990955454</li>
-            <li>Location: India</li>
+            <li>Phone: +91-9990955454, +91-7982190064</li>
+            <li>
+              Location: Plot No.27 Gali No.3 Rajendra Nagar Industrial Area
+              Ghaziabad U.P. 201007
+            </li>
           </ul>
         </div>
-
       </div>
 
       {/* Bottom Line */}
       <div className="mt-12 border-t pt-6 text-center text-gray-500 text-sm">
         © 2026 WellnessPro. All Rights Reserved.
       </div>
-
     </footer>
   );
 };
