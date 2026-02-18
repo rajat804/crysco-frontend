@@ -1,31 +1,87 @@
 import React, { useState } from "react";
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
+
+  /* ================= CONTACT FORM STATE ================= */
+  const [contactData, setContactData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleContactChange = (e) => {
+    setContactData({ ...contactData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleContactSubmit = (e) => {
     e.preventDefault();
-    // Here you can add form submission logic (API call or email)
+
     alert(
-      `Thank you, ${formData.name}! We received your message. We will contact you soon.`,
+      `Thank you, ${contactData.name}! We received your message. We will contact you soon.`,
     );
-    setFormData({ name: "", email: "", phone: "", message: "" });
+
+    setContactData({
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    });
+  };
+
+  /* ================= BULK ORDER FORM STATE ================= */
+  const [bulkData, setBulkData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    product: "",
+    size: "",
+    quantity: "",
+    message: "",
+  });
+
+  const handleBulkChange = (e) => {
+    setBulkData({ ...bulkData, [e.target.name]: e.target.value });
+  };
+
+  const handleBulkSubmit = (e) => {
+    e.preventDefault();
+
+    const whatsappNumber = "917982190064";
+
+    const textMessage = `Hello! I want to place a bulk order.
+
+Name: ${bulkData.name}
+Email: ${bulkData.email}
+Phone: ${bulkData.phone}
+Product: ${bulkData.product}
+Size: ${bulkData.size}
+Quantity: ${bulkData.quantity}
+Message: ${bulkData.message}`;
+
+    const encodedMessage = encodeURIComponent(textMessage);
+
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodedMessage}`,
+      "_blank"
+    );
+
+    setBulkData({
+      name: "",
+      email: "",
+      phone: "",
+      product: "",
+      size: "",
+      quantity: "",
+      message: "",
+    });
   };
 
   return (
     <div className="w-full">
+
       {/* ================= CONTACT HERO SECTION ================= */}
       <section className="relative w-full h-[380px] md:h-[480px] overflow-hidden">
-        {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -33,82 +89,70 @@ const ContactPage = () => {
               "url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80')",
           }}
         />
-
-        {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
 
-        {/* Decorative Blur Circles */}
-        <div className="absolute top-10 left-10 w-32 h-32 bg-teal-400/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-cyan-400/30 rounded-full blur-3xl" />
-
-        {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-wide">
             Contact Us
           </h1>
 
           <p className="text-gray-200 text-lg md:text-xl max-w-2xl mb-8">
-            We'd love to hear from you! Whether it's bulk orders, customization,
-            or general inquiries — our team is ready to assist you.
+            We'd love to hear from you! Whether it's bulk orders,
+            customization, or general inquiries — our team is ready to assist you.
           </p>
-
-          {/* Buttons */}
-          <div className="flex flex-wrap gap-4 justify-center">
-            <button className="px-6 py-3 bg-teal-500 text-white rounded-lg font-semibold hover:bg-teal-600 transition">
-              Get in Touch
-            </button>
-
-            <button className="px-6 py-3 border border-white text-white rounded-lg font-semibold hover:bg-white hover:text-black transition">
-              Request a Quote
-            </button>
-          </div>
         </div>
       </section>
 
-      {/* CONTACT INFO & FORM */}
+      {/* ================= CONTACT INFO & FORM ================= */}
       <div className="max-w-6xl mx-auto py-12 px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
+
         {/* CONTACT FORM */}
         <div>
           <h2 className="text-3xl font-bold text-gray-800 mb-6">
             Get in Touch
           </h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
+
+          <form onSubmit={handleContactSubmit} className="space-y-4">
             <input
               type="text"
               name="name"
               placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
+              value={contactData.name}
+              onChange={handleContactChange}
               required
-              className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#06B6D4]"
+              className="w-full p-3 rounded border border-gray-300 focus:ring-2 focus:ring-[#06B6D4]"
             />
+
             <input
               type="email"
               name="email"
               placeholder="Your Email"
-              value={formData.email}
-              onChange={handleChange}
+              value={contactData.email}
+              onChange={handleContactChange}
               required
-              className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#06B6D4]"
+              className="w-full p-3 rounded border border-gray-300 focus:ring-2 focus:ring-[#06B6D4]"
             />
+
             <input
               type="text"
               name="phone"
               placeholder="Your Phone"
-              value={formData.phone}
-              onChange={handleChange}
+              value={contactData.phone}
+              onChange={handleContactChange}
               required
-              className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#06B6D4]"
+              className="w-full p-3 rounded border border-gray-300 focus:ring-2 focus:ring-[#06B6D4]"
             />
+
             <textarea
               name="message"
               placeholder="Your Message"
-              value={formData.message}
-              onChange={handleChange}
+              value={contactData.message}
+              onChange={handleContactChange}
               required
               rows={5}
-              className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#06B6D4]"
+              className="w-full p-3 rounded border border-gray-300 focus:ring-2 focus:ring-[#06B6D4]"
             />
+
             <button
               type="submit"
               className="w-full py-3 bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white font-semibold rounded hover:opacity-90 transition"
@@ -192,88 +236,95 @@ const ContactPage = () => {
         </div>
       </div>
 
-      {/* bulk order form */}
+      {/* ================= BULK ORDER FORM ================= */}
       <div className="bg-gray-100">
-      <div className="max-w-4xl mx-auto py-12 px-4">
-        <h2 className="text-3xl font-bold mb-6 text-center">Bulk Order Form</h2>
+        <div className="max-w-4xl mx-auto py-12 px-4">
+          <h2 className="text-3xl font-bold mb-6 text-center">
+            Bulk Order Form
+          </h2>
 
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white p-8 rounded shadow-lg space-y-4"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="p-3 border rounded focus:ring-2 focus:ring-[#06B6D4]"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="p-3 border rounded focus:ring-2 focus:ring-[#06B6D4]"
-            />
-            <input
-              type="text"
-              name="phone"
-              placeholder="Phone Number"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-              className="p-3 border rounded focus:ring-2 focus:ring-[#06B6D4]"
-            />
-            <input
-              type="text"
-              name="product"
-              placeholder="Product Name"
-              value={formData.product}
-              onChange={handleChange}
-              required
-              className="p-3 border rounded focus:ring-2 focus:ring-[#06B6D4]"
-            />
-            <input
-              type="text"
-              name="size"
-              placeholder="Product Size"
-              value={formData.size}
-              onChange={handleChange}
-              required
-              className="p-3 border rounded focus:ring-2 focus:ring-[#06B6D4]"
-            />
-            <input
-              type="number"
-              name="quantity"
-              placeholder="Quantity"
-              value={formData.quantity}
-              onChange={handleChange}
-              required
-              className="p-3 border rounded focus:ring-2 focus:ring-[#06B6D4]"
-            />
-          </div>
-
-          <textarea
-            name="message"
-            placeholder="Additional Message (optional)"
-            value={formData.message}
-            onChange={handleChange}
-            className="w-full p-3 border rounded h-32 focus:ring-2 focus:ring-[#06B6D4]"
-          />
-
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white py-3 rounded font-semibold hover:opacity-90 transition"
+          <form
+            onSubmit={handleBulkSubmit}
+            className="bg-white p-8 rounded shadow-lg space-y-4"
           >
-            Submit Bulk Order via WhatsApp
-          </button>
-        </form>
-      </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                value={bulkData.name}
+                onChange={handleBulkChange}
+                required
+                className="p-3 border rounded"
+              />
+
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={bulkData.email}
+                onChange={handleBulkChange}
+                required
+                className="p-3 border rounded"
+              />
+
+              <input
+                type="text"
+                name="phone"
+                placeholder="Phone Number"
+                value={bulkData.phone}
+                onChange={handleBulkChange}
+                required
+                className="p-3 border rounded"
+              />
+
+              <input
+                type="text"
+                name="product"
+                placeholder="Product Name"
+                value={bulkData.product}
+                onChange={handleBulkChange}
+                required
+                className="p-3 border rounded"
+              />
+
+              <input
+                type="text"
+                name="size"
+                placeholder="Product Size"
+                value={bulkData.size}
+                onChange={handleBulkChange}
+                required
+                className="p-3 border rounded"
+              />
+
+              <input
+                type="number"
+                name="quantity"
+                placeholder="Quantity"
+                value={bulkData.quantity}
+                onChange={handleBulkChange}
+                required
+                className="p-3 border rounded"
+              />
+            </div>
+
+            <textarea
+              name="message"
+              placeholder="Additional Message"
+              value={bulkData.message}
+              onChange={handleBulkChange}
+              className="w-full p-3 border rounded h-32"
+            />
+
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white py-3 rounded font-semibold hover:opacity-90 transition"
+            >
+              Submit Bulk Order via WhatsApp
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
