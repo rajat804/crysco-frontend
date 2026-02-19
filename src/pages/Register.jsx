@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate(); // ← useNavigate hook
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,7 +19,7 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -26,20 +27,38 @@ const Register = () => {
       return;
     }
 
-    console.log("Register Data:", formData);
-    alert("Registration Submitted");
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || "Registration failed");
+      } else {
+        alert("Registration successful! Redirecting to login...");
+        navigate("/login"); //  redirect to login page
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100 px-4">
       <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl my-5">
-
-        <h2 className="text-3xl font-bold text-center mb-6">
-          Create Account
-        </h2>
+        <h2 className="text-3xl font-bold text-center mb-6">Create Account</h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-
           {/* Name */}
           <div>
             <label className="block mb-1 font-medium">Full Name</label>
@@ -114,9 +133,7 @@ const Register = () => {
             />
             <button
               type="button"
-              onClick={() =>
-                setShowConfirmPassword(!showConfirmPassword)
-              }
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               className="absolute right-3 top-10 text-gray-500"
             >
               {showConfirmPassword ? <Eye size={20} /> : <EyeOff size={20} />}
@@ -126,7 +143,6 @@ const Register = () => {
           <button className="w-full bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700 transition">
             Register
           </button>
-
         </form>
 
         <p className="text-center mt-6">
@@ -135,7 +151,6 @@ const Register = () => {
             Login
           </Link>
         </p>
-
       </div>
     </div>
   );

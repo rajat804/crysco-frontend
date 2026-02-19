@@ -14,6 +14,8 @@ import AdminLayout from "./layouts/AdminLayout";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminRegister from "./pages/admin/AdminRegister";
 import Dashboard from "./pages/admin/Dashboard";
+import UserDashboard from "./pages/user/UserDashboard";
+import Products from "./pages/admin/Products";
 
 function App() {
   return (
@@ -32,15 +34,17 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
-
+        <Route path="/user/dashboard" element={<UserDashboard />} />
         {/* ADMIN ROUTES (NO HEADER / FOOTER) */}
-        <Route path="/admin" element={<AdminLayout/>}>
-          <Route path="login" element={<AdminLogin/>}/>
-          <Route path="register" element={<AdminRegister/>}/>
-          <Route path="dashboard" element={<Dashboard/>}/>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="login" element={<AdminLogin />} />
+          <Route path="register" element={<AdminRegister />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="products" element={<Products />} />
+          {/* <Route path="orders" element={<order />} /> */}
+          {/* <Route path="users" element={<Dashboard />} /> */}
+
         </Route>
-
-
 
         {/* Catch-all route for 404 */}
         <Route
@@ -48,7 +52,6 @@ function App() {
           element={<h1 className="text-center mt-10">Page Not Found</h1>}
         />
       </Routes>
-      
     </BrowserRouter>
   );
 }

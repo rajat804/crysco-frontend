@@ -16,25 +16,43 @@ const AdminLogin = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Admin Login:", formData);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/admin/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        },
+      );
 
-    // Example redirect
-    navigate("/admin/dashboard");
+      const data = await response.json();
+
+      if (data.success) {
+        localStorage.setItem("adminToken", data.token);
+        localStorage.setItem("adminInfo", JSON.stringify(data.admin));
+        navigate("/admin/dashboard");
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4">
       <div className="w-full max-w-md bg-gray-800 p-8 rounded-2xl shadow-2xl">
-
         <h2 className="text-3xl font-bold text-center text-white mb-6">
           Admin Login
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-
           {/* Email */}
           <div>
             <label className="block text-gray-300 mb-1">Email</label>
@@ -72,9 +90,6 @@ const AdminLogin = () => {
             Login as Admin
           </button>
         </form>
-
-        
-
       </div>
     </div>
   );

@@ -19,18 +19,43 @@ const AdminRegister = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
+  if (formData.password !== formData.confirmPassword) {
+    alert("Passwords do not match!");
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/api/admin/register`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.success) {
+      localStorage.setItem("adminToken", data.token);
+      navigate("/admin/login");
+    } else {
+      alert(data.message);
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-    console.log("Admin Register:", formData);
-
-    navigate("/admin/dashboard");
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4">
