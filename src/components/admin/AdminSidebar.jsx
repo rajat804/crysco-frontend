@@ -43,7 +43,14 @@ const AdminSidebar = ({ setSidebarOpen }) => {
           <LayoutDashboard size={20} />
           Dashboard
         </NavLink>
-
+        <NavLink to="/admin/products-video" className={({ isActive }) =>
+          `${linkStyle} ${
+            isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
+          }`
+        }>
+          <Package size={20} />
+          Add Product Video
+        </NavLink>
         <NavLink to="/admin/products" className={({ isActive }) =>
           `${linkStyle} ${
             isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
