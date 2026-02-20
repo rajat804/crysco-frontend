@@ -16,6 +16,9 @@ import AdminRegister from "./pages/admin/AdminRegister";
 import Dashboard from "./pages/admin/Dashboard";
 import UserDashboard from "./pages/user/UserDashboard";
 import Products from "./pages/admin/Products";
+import ProductVideo from "./pages/admin/ProductVideo";
+import ShowProducts from "./pages/admin/ShowProducts";
+import ShowVideos from "./pages/admin/ShowVideos";
 
 function App() {
   return (
@@ -40,8 +43,11 @@ function App() {
           <Route path="login" element={<AdminLogin />} />
           <Route path="register" element={<AdminRegister />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="products-video" element={<ProductVideo />} />
           <Route path="products" element={<Products />} />
-          {/* <Route path="orders" element={<order />} /> */}
+          <Route path="products-show" element={<ShowProducts />} />
+          <Route path="videos" element={<ShowVideos />} />
+
           {/* <Route path="users" element={<Dashboard />} /> */}
 
         </Route>
