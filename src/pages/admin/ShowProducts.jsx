@@ -103,7 +103,7 @@ const ShowProducts = () => {
                             item.images.map((img, i) => (
                               <img
                                 key={i}
-                                src={img.url}
+                                src={img}
                                 alt="product"
                                 className="w-12 h-12 object-cover rounded-md border border-slate-600"
                               />
