@@ -19,6 +19,7 @@ import Products from "./pages/admin/Products";
 import ProductVideo from "./pages/admin/ProductVideo";
 import ShowProducts from "./pages/admin/ShowProducts";
 import ShowVideos from "./pages/admin/ShowVideos";
+import EditProduct from "./pages/admin/EditProduct";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="products" element={<Products />} />
           <Route path="products-show" element={<ShowProducts />} />
           <Route path="videos" element={<ShowVideos />} />
+          <Route path="edit-product/:id" element={<EditProduct/>}/>
 
           {/* <Route path="users" element={<Dashboard />} /> */}
 
