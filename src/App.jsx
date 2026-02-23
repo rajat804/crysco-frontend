@@ -33,7 +33,7 @@ function App() {
           <Route path="/bulk-order" element={<BulkOrder />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/product-details" element={<ProductDetails />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/customized" element={<Customized />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
