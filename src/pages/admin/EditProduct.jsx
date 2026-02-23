@@ -142,6 +142,7 @@ const EditProduct = () => {
     setLoading(true);
 
     const data = new FormData();
+    
     data.append("title", formData.title);
     data.append("category", formData.category);
     data.append("categoryType", formData.categoryType);
@@ -152,8 +153,8 @@ const EditProduct = () => {
     data.append("amazonLink", formData.amazonLink);
     data.append("description", formData.description);
     data.append("existingImages", JSON.stringify(existingImages));
-    data.append("amazingDeals", formData.amazingDeals);
-    data.append("newArrivals", formData.newArrivals);
+    data.append("amazingDeals", String(formData.amazingDeals));
+    data.append("newArrivals", String(formData.newArrivals));
 
     formData.images.forEach((image) => {
       data.append("images", image);
@@ -314,24 +315,22 @@ const EditProduct = () => {
           </button>
 
           <div className="flex gap-6">
-            <label className="flex items-center gap-2 cursor-pointer">
+            <label>
               <input
                 type="checkbox"
                 name="amazingDeals"
                 checked={formData.amazingDeals}
                 onChange={handleCheckboxChange}
-                className="w-5 h-5"
               />
               Amazing Deals
             </label>
 
-            <label className="flex items-center gap-2 cursor-pointer">
+            <label>
               <input
                 type="checkbox"
                 name="newArrivals"
                 checked={formData.newArrivals}
                 onChange={handleCheckboxChange}
-                className="w-5 h-5"
               />
               New Arrivals
             </label>
