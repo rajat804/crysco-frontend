@@ -78,6 +78,8 @@ const ShowProducts = () => {
                   <tr>
                     <th className="px-4 py-3">Images</th>
                     <th className="px-4 py-3">Title</th>
+                    <th className="px-4 py-3">Amazaing Deails</th>
+                    <th className="px-4 py-3">New Archive</th>
                     <th className="px-4 py-3">Category</th>
                     <th className="px-4 py-3">Color</th>
                     <th className="px-4 py-3">Sizes</th>
@@ -119,7 +121,12 @@ const ShowProducts = () => {
                       <td className="px-4 py-3 max-w-[200px] break-words">
                         {item.title}
                       </td>
-
+                      <td className="px-4 py-3">
+                        {item.amazingDeals ? "✅" : "❌"}
+                      </td>
+                      <td className="px-4 py-3">
+                        {item.newArrivals ? "✅" : "❌"}
+                      </td>
                       <td className="px-4 py-3 whitespace-nowrap">
                         {item.category}
                       </td>
