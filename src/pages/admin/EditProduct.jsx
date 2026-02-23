@@ -145,12 +145,12 @@ const EditProduct = () => {
     data.append("title", formData.title);
     data.append("category", formData.category);
     data.append("categoryType", formData.categoryType);
-    data.append("sizes", formData.sizes);
+    data.append("sizes", JSON.stringify(formData.sizes));
+    data.append("highlights", JSON.stringify(formData.highlights));
     data.append("mrp", formData.mrp);
     data.append("salePrice", formData.salePrice);
     data.append("amazonLink", formData.amazonLink);
     data.append("description", formData.description);
-    data.append("highlights", formData.highlights);
     data.append("existingImages", JSON.stringify(existingImages));
     data.append("amazingDeals", formData.amazingDeals);
     data.append("newArrivals", formData.newArrivals);
