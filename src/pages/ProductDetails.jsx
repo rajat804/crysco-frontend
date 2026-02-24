@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -10,12 +11,13 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [isCartModalOpen, setCartModalOpen] = useState(false);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  const { user } = useAuth();
 
   useEffect(() => {
     // Check if user is logged in
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
 
     // Fetch product
     const fetchProduct = async () => {
@@ -45,8 +47,9 @@ const ProductDetails = () => {
       : 0;
 
   const handleOpenCartModal = () => {
-    if (!isLoggedIn) {
-      alert("Please login to add products to cart");
+    if (!user) {
+      alert("Please login first");
+      navigate("/login");
       return;
     }
     setCartModalOpen(true);
@@ -56,14 +59,33 @@ const ProductDetails = () => {
 
   const handleAddToCart = async () => {
     try {
+      if (!user) {
+        alert("Please login first!");
+        navigate("/login");
+        return;
+      }
+
+      // 🔥 Size validation
+      if (product.sizes && product.sizes.length > 0 && !selectedSize) {
+        alert("Please select a size");
+        return;
+      }
+
+      // 🔥 Color validation
+      if (product.colors && product.colors.length > 0 && !selectedColor) {
+        alert("Please select a color");
+        return;
+      }
+
       const token = localStorage.getItem("token");
+
       const cartItem = {
         productId: product._id,
         title: product.title,
         price: product.salePrice,
-        quantity,
-        size: product.sizes ? selectedSize : null,
-        color: product.colors ? selectedColor : product.categoryType || null,
+        quantity: Number(quantity),
+        size: selectedSize || null,
+        color: selectedColor || null,
         image: product.images[0],
       };
 
@@ -77,9 +99,9 @@ const ProductDetails = () => {
       });
 
       const data = await res.json();
+
       if (res.ok) {
         alert("Added to cart successfully!");
-        console.log(data);
         setCartModalOpen(false);
       } else {
         alert(data.message);
@@ -245,21 +267,19 @@ const ProductDetails = () => {
                 {product.sizes && product.sizes.length > 0 && (
                   <div className="mb-4">
                     <h3 className="font-semibold mb-2">Select Size:</h3>
-                    <div className="flex gap-2 flex-wrap">
+
+                    <select
+                      value={selectedSize}
+                      onChange={(e) => setSelectedSize(e.target.value)}
+                      className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#06B6D4]"
+                    >
+                      <option value="">-- Select Size --</option>
                       {product.sizes.map((size) => (
-                        <button
-                          key={size}
-                          className={`px-4 py-2 border rounded font-medium ${
-                            selectedSize === size
-                              ? "border-[#06B6D4] bg-[#E0F7FA]"
-                              : "border-gray-300 hover:border-[#06B6D4]"
-                          }`}
-                          onClick={() => setSelectedSize(size)}
-                        >
+                        <option key={size} value={size}>
                           {size}
-                        </button>
+                        </option>
                       ))}
-                    </div>
+                    </select>
                   </div>
                 )}
 
