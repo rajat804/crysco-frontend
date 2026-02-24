@@ -1,11 +1,15 @@
 import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/Logo-removebg-preview.png";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [token, setToken] = useState(null);
 
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, []);
   const navItems = [
     { name: "Home", path: "/" },
     { name: "Garbage Bags", path: "/garbage-bags" },
@@ -51,9 +55,15 @@ const Header = () => {
         {/* Icons */}
         <div className="flex items-center gap-5">
           {/* Login Icon */}
-          <NavLink to="/login">
-            <User className="cursor-pointer text-gray-700 hover:text-emerald-600 transition" />
-          </NavLink>
+          {token ? (
+            <NavLink to="/user/dashboard">
+              <User className="cursor-pointer text-gray-700 hover:text-emerald-600 transition" />
+            </NavLink>
+          ) : (
+            <NavLink to="/login">
+              <User className="cursor-pointer text-gray-700 hover:text-emerald-600 transition" />
+            </NavLink>
+          )}
 
           {/* Cart */}
           <div className="relative cursor-pointer">
