@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-
+import { Link } from "react-router-dom";
 const UserDashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -63,7 +63,7 @@ const UserDashboard = () => {
               </div>
 
               <h2 className="text-xl font-bold hidden lg:block">My Account</h2>
-
+                <Link to={'/'}>Home</Link>
               <button className="w-full text-left py-2 hover:text-teal-600">
                 Dashboard
               </button>
