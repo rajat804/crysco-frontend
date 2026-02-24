@@ -33,8 +33,7 @@ const Login = () => {
         // Store token in localStorage
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-        // Redirect to dashboard
-        navigate("/user/dashboard");
+        navigate("/");
       }
     } catch (error) {
       console.error(error);
