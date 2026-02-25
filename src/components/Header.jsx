@@ -1,9 +1,12 @@
 import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/Logo-removebg-preview.png";
+import { useCart } from "../context/CartContext";
 
 const Header = () => {
+  const { cartCount } = useCart();
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [token, setToken] = useState(null);
 
@@ -66,11 +69,17 @@ const Header = () => {
           )}
 
           {/* Cart */}
-          <div className="relative cursor-pointer">
+          <div
+            className="relative cursor-pointer"
+            onClick={() => navigate("/user/mycart")}
+          >
             <ShoppingBag className="text-gray-700 hover:text-emerald-600 transition" />
-            <span className="absolute -top-2 -right-2 bg-emerald-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-              0
-            </span>
+
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-emerald-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                {cartCount}
+              </span>
+            )}
           </div>
         </div>
       </div>
