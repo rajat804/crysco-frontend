@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UserSidebar from "../../components/user/UserSidebar";
+import { useCart } from "../../context/CartContext";
 
 const MyCart = () => {
+  const { fetchCart } = useCart();
   const [cart, setCart] = useState({ items: [] });
-  const navigate = useNavigate();
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [removingId, setRemovingId] = useState(null);
+  const navigate = useNavigate();
+  const { setCartCount } = useCart();
+  const [updatingId, setUpdatingId] = useState(null);
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -14,10 +17,10 @@ const MyCart = () => {
       navigate("/login");
       return;
     }
-    fetchCart();
+    loadCart();
   }, []);
 
-  const fetchCart = async () => {
+  const loadCart = async () => {
     try {
       const res = await fetch(`${BASE_URL}/api/cart`, {
         headers: {
@@ -27,6 +30,14 @@ const MyCart = () => {
 
       const data = await res.json();
       setCart(data);
+
+      // 🔥 Global badge update
+      const totalQty = data.items?.reduce(
+        (acc, item) => acc + item.quantity,
+        0,
+      );
+
+      setCartCount(totalQty || 0);
     } catch (err) {
       console.log("Cart fetch error:", err);
     }
@@ -34,29 +45,35 @@ const MyCart = () => {
 
   const updateQuantity = async (item, newQty) => {
     if (newQty < 1) return;
-
-    await fetch(`${BASE_URL}/api/cart`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        productId: item.productId,
-        size: item.size,
-        color: item.color,
-        quantity: newQty,
-      }),
-    });
-
-    fetchCart();
+    setUpdatingId(item.productId);
+    try{
+      await fetch(`${BASE_URL}/api/cart`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          productId: item.productId,
+          size: item.size,
+          color: item.color,
+          quantity: newQty,
+        }),
+      });
+      
+      loadCart(); // refresh + badge update
+    } catch (error) {
+    console.log(error);
+  } finally {
+    setUpdatingId(null); // 🔥 stop loading
+  }
   };
 
   const removeItem = async (item) => {
-    setRemovingId(item.productId); // 👈 button ko loading mode me daalo
+    setRemovingId(item.productId);
 
     try {
-      const res = await fetch(`${BASE_URL}/api/cart`, {
+      await fetch(`${BASE_URL}/api/cart`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -68,13 +85,12 @@ const MyCart = () => {
           color: item.color,
         }),
       });
-
-      await res.json();
-      fetchCart();
+      await fetchCart();
+      loadCart(); // refresh + badge update
     } catch (error) {
       console.log(error);
     } finally {
-      setRemovingId(null); // 👈 loading hata do
+      setRemovingId(null);
     }
   };
 
@@ -85,17 +101,17 @@ const MyCart = () => {
 
   return (
     <div className="min-h-screen bg-slate-100 p-4">
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-4 gap-6">
-        <div className="lg:col-span-3 bg-white p-6 rounded-2xl shadow-md">
+      <div className="max-w-6xl mx-auto">
+        <div className="bg-white p-6 rounded-2xl shadow-md">
           <h2 className="text-2xl font-bold mb-6">My Cart</h2>
 
           {cart.items.length === 0 ? (
             <p>Your cart is empty 🛒</p>
           ) : (
             <>
-              {cart.items.map((item, index) => (
+              {cart.items.map((item) => (
                 <div
-                  key={index}
+                  key={`${item.productId}-${item.size}-${item.color}`}
                   className="flex flex-col sm:flex-row justify-between items-center border-b py-4 gap-4"
                 >
                   <div className="flex items-center gap-4">
@@ -116,16 +132,30 @@ const MyCart = () => {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => updateQuantity(item, item.quantity - 1)}
-                      className="px-3 py-1 border rounded"
+                      disabled={updatingId === item.productId}
+                      className={`px-3 py-1 border rounded transition 
+  ${
+    updatingId === item.productId
+      ? "opacity-50 cursor-not-allowed"
+      : "hover:bg-gray-100"
+  }`}
                     >
-                      -
+                      {updatingId === item.productId ? "..." : "-"}
                     </button>
-                    <span>{item.quantity}</span>
+
+                    <span className="px-2">{item.quantity}</span>
+
                     <button
                       onClick={() => updateQuantity(item, item.quantity + 1)}
-                      className="px-3 py-1 border rounded"
+                      disabled={updatingId === item.productId}
+                      className={`px-3 py-1 border rounded transition 
+  ${
+    updatingId === item.productId
+      ? "opacity-50 cursor-not-allowed"
+      : "hover:bg-gray-100"
+  }`}
                     >
-                      +
+                      {updatingId === item.productId ? "..." : "+"}
                     </button>
                   </div>
 
