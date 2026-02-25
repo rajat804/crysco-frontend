@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useEffect } from "react";
 
 const UserDashboard = () => {
+  const {user} = useAuth();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userData = localStorage.getItem("user");
-
-    if (!token || !userData) {
+    if (!user) {
       navigate("/login");
-    } else {
-      setUser(JSON.parse(userData));
     }
-  }, []);
+  }, [user, navigate]);
 
   if (!user) return null;
 
   return (
     <div className="min-h-screen bg-slate-100">
       {/* 🔹 Mobile Header */}
-
       <div className="max-w-6xl mx-auto lg:p-8 p-4">
         <div className="grid lg:grid-cols-4 gap-6">
           {/* 🔹 Main Content */}
