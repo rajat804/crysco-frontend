@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
+  const {login} = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     emailOrPhone: "",
@@ -15,31 +17,28 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+  try {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (!response.ok) {
-        alert(data.message || "Login failed");
-      } else {
-        alert("Login successful!");
-        // Store token in localStorage
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong");
+    if (!response.ok) {
+      alert(data.message || "Login failed");
+    } else {
+      login(data.user, data.token);   // 🔥 context update
+      navigate("/user/dashboard", { replace: true });
     }
-  };
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong");
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100 px-4">
