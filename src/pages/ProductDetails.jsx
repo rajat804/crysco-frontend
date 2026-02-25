@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 const ProductDetails = () => {
   const { id } = useParams();
+  const { fetchCart } = useCart();
+  const [adding, setAdding] = useState(false);
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
@@ -59,6 +62,7 @@ const ProductDetails = () => {
 
   const handleAddToCart = async () => {
     try {
+      setAdding(true)
       if (!user) {
         alert("Please login first!");
         navigate("/login");
@@ -103,12 +107,15 @@ const ProductDetails = () => {
       if (res.ok) {
         alert("Added to cart successfully!");
         setCartModalOpen(false);
+        fetchCart();
       } else {
         alert(data.message);
       }
     } catch (err) {
       console.log(err);
       alert("Error adding to cart");
+    } finally{
+      setAdding(false);
     }
   };
 
@@ -327,9 +334,18 @@ const ProductDetails = () => {
                 {/* Add to Cart Confirm */}
                 <button
                   onClick={handleAddToCart}
-                  className="w-full py-2 bg-[#06B6D4] text-white font-semibold rounded hover:opacity-90 transition"
+                  disabled={adding}
+                  className={`w-full py-2 text-white font-semibold rounded transition 
+  ${adding ? "bg-gray-400 cursor-not-allowed" : "bg-[#06B6D4] hover:opacity-90"}`}
                 >
-                  Confirm Add to Cart
+                  {adding ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                      Adding...
+                    </span>
+                  ) : (
+                    "Confirm Add to Cart"
+                  )}
                 </button>
               </div>
             </div>
