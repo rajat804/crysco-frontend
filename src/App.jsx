@@ -20,6 +20,8 @@ import ProductVideo from "./pages/admin/ProductVideo";
 import ShowProducts from "./pages/admin/ShowProducts";
 import ShowVideos from "./pages/admin/ShowVideos";
 import EditProduct from "./pages/admin/EditProduct";
+import MyCart from "./pages/user/MyCart";
+import UserLayout from "./layouts/UserLayout";
 
 function App() {
   return (
@@ -38,7 +40,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
-        <Route path="/user/dashboard" element={<UserDashboard />} />
+        {/* user dashboard route */}
+        <Route path="/user" element={<UserLayout />}>
+          <Route path="dashboard" element={<UserDashboard />} />
+          <Route path="mycart" element={<MyCart />} />
+        </Route>
         {/* ADMIN ROUTES (NO HEADER / FOOTER) */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="login" element={<AdminLogin />} />
@@ -48,10 +54,9 @@ function App() {
           <Route path="products" element={<Products />} />
           <Route path="products-show" element={<ShowProducts />} />
           <Route path="videos" element={<ShowVideos />} />
-          <Route path="edit-product/:id" element={<EditProduct/>}/>
+          <Route path="edit-product/:id" element={<EditProduct />} />
 
           {/* <Route path="users" element={<Dashboard />} /> */}
-
         </Route>
 
         {/* Catch-all route for 404 */}
