@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
 
 const MyCart = () => {
   const { fetchCart } = useCart();
@@ -10,15 +11,40 @@ const MyCart = () => {
   const { setCartCount } = useCart();
   const [updatingId, setUpdatingId] = useState(null);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const token = localStorage.getItem("token");
+  const { user, token } = useAuth();
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-      return;
+ useEffect(() => {
+  if (!user || !token) {
+    setCart({ items: [] });
+    return;
+  }
+
+  const load = async () => {
+    setCart({ items: [] }); // 🔥 clear old user cart immediately
+
+    try {
+      const res = await fetch(`${BASE_URL}/api/cart`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+      setCart(data);
+
+      const totalQty = data.items?.reduce(
+        (acc, item) => acc + item.quantity,
+        0
+      );
+
+      setCartCount(totalQty || 0);
+    } catch (err) {
+      console.log(err);
     }
-    loadCart();
-  }, []);
+  };
+
+  load();
+}, [user, token]);
 
   const loadCart = async () => {
     try {
