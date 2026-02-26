@@ -20,58 +20,65 @@ const Checkout = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handlePayment = async () => {
-    setLoading(true);
-    const token = localStorage.getItem("token");
+  if (!form.fullName || !form.phone || !form.address || !form.city || !form.pincode) {
+    alert("Please fill all fields");
+    return;
+  }
 
-    try {
-      const res = await fetch(`${BASE_URL}/api/payment/create-order`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          shippingAddress: form,
-        }),
-      });
+  setLoading(true);
+  const token = localStorage.getItem("token");
 
-      const data = await res.json();
+  try {
+    const res = await fetch(`${BASE_URL}/api/payment/create-order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        shippingAddress: form,
+      }),
+    });
 
-      const options = {
-        key: data.key,
-        amount: data.amount,
-        currency: "INR",
-        name: "Your Store",
-        description: "Order Payment",
-        order_id: data.orderId,
-        handler: async function (response) {
-          await fetch(`${BASE_URL}/api/payment/verify`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(response),
-          });
+    const data = await res.json();
 
-          await fetchCart();
-          navigate("/order-success");
-        },
-        prefill: {
-          name: form.fullName,
-          contact: form.phone,
-        },
-        theme: { color: "#06B6D4" },
-      };
+    const options = {
+      key: data.key,
+      amount: data.amount,
+      currency: "INR",
+      name: "Monster Store",
+      description: "Order Payment",
+      order_id: data.orderId,
+      handler: async function (response) {
 
-      const rzp = new window.Razorpay(options);
-      rzp.open();
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+        await fetch(`${BASE_URL}/api/payment/verify`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(response),
+        });
+        await fetchCart();
+        navigate("/order-success");
+      },
+      prefill: {
+        name: form.fullName,
+        contact: form.phone,
+      },
+      theme: { color: "#10B981" },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+
+  } catch (err) {
+    console.log(err);
+    alert("Payment failed");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="max-w-lg mx-auto p-6">
