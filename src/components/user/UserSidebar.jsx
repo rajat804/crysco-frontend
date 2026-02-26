@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 
 const UserSidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
-
-    const handleLinkClick = () => {
-  setSidebarOpen(false);
-};
+  const handleLinkClick = () => {
+    setSidebarOpen(false);
+  };
 
   return (
     <>
@@ -38,15 +37,27 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
 
         <h2 className="text-xl font-bold hidden lg:block">My Account</h2>
 
-        <Link to="/" onClick={handleLinkClick} className="block py-2 hover:text-teal-600">
+        <Link
+          to="/"
+          onClick={handleLinkClick}
+          className="block py-2 hover:text-teal-600"
+        >
           Home
         </Link>
 
-        <Link to="/user/dashboard" onClick={handleLinkClick} className="block py-2 hover:text-teal-600">
+        <Link
+          to="/user/dashboard"
+          onClick={handleLinkClick}
+          className="block py-2 hover:text-teal-600"
+        >
           Dashboard
         </Link>
 
-        <Link to="/user/mycart" onClick={handleLinkClick} className="block py-2 hover:text-teal-600">
+        <Link
+          to="/user/mycart"
+          onClick={handleLinkClick}
+          className="block py-2 hover:text-teal-600"
+        >
           My Cart
         </Link>
 
