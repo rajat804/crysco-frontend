@@ -22,6 +22,7 @@ import ShowVideos from "./pages/admin/ShowVideos";
 import EditProduct from "./pages/admin/EditProduct";
 import MyCart from "./pages/user/MyCart";
 import UserLayout from "./layouts/UserLayout";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
           path="*"
           element={<h1 className="text-center mt-10">Page Not Found</h1>}
         />
+        <Route path="/checkout"  element={<Checkout/>}/>
       </Routes>
     </BrowserRouter>
   );
