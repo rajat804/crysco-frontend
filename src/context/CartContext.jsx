@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useAuth } from "./AuthContext";
 
 const CartContext = createContext();
 
@@ -6,9 +7,9 @@ export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-  const fetchCart = async () => {
-    const token = localStorage.getItem("token");
+  const { token } = useAuth();
 
+  const fetchCart = async () => {
     if (!token) {
       setCartCount(0);
       return;
@@ -23,18 +24,21 @@ export const CartProvider = ({ children }) => {
 
       const data = await res.json();
 
-      const totalProducts = data.items ? data.items.length : 0;
+      const totalQty = data.items?.length || 0;
 
-      setCartCount(totalProducts || 0);
+      setCartCount(totalQty || 0);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // 🔥 Important: jab bhi token change ho
   useEffect(() => {
-    fetchCart();
-  }, []);
+    if (token) {
+      fetchCart();
+    } else {
+      setCartCount(0);
+    }
+  }, [token]);
 
   return (
     <CartContext.Provider value={{ cartCount, fetchCart }}>
