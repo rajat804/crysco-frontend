@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
-  const {login} = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     emailOrPhone: "",
@@ -17,39 +17,41 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/auth/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!response.ok) {
-      alert(data.message || "Login failed");
-    } else {
-      login(data.user, data.token);   // 🔥 context update
-      navigate("/user/dashboard", { replace: true });
+      if (!response.ok) {
+        alert(data.message || "Login failed");
+      } else {
+        login(data.user, data.token); // 🔥 context update
+        console.log("Logged user:", data.user);
+        console.log("Token:", data.token);
+
+        navigate("/user/dashboard", { replace: true });
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
     }
-  } catch (error) {
-    console.error(error);
-    alert("Something went wrong");
-  }
-};
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100 px-4">
       <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl">
-
-        <h2 className="text-3xl font-bold text-center mb-6">
-          Login
-        </h2>
+        <h2 className="text-3xl font-bold text-center mb-6">Login</h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-
           {/* Email or Phone */}
           <div>
             <label className="block mb-1 font-medium">
@@ -89,7 +91,6 @@ const Login = () => {
           <button className="w-full bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700 transition">
             Login
           </button>
-
         </form>
 
         <p className="text-center mt-6">
@@ -98,7 +99,6 @@ const Login = () => {
             Register
           </Link>
         </p>
-
       </div>
     </div>
   );
