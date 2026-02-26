@@ -46,7 +46,7 @@ const MyCart = () => {
   const updateQuantity = async (item, newQty) => {
     if (newQty < 1) return;
     setUpdatingId(item.productId);
-    try{
+    try {
       await fetch(`${BASE_URL}/api/cart`, {
         method: "PUT",
         headers: {
@@ -60,13 +60,13 @@ const MyCart = () => {
           quantity: newQty,
         }),
       });
-      
+
       loadCart(); // refresh + badge update
     } catch (error) {
-    console.log(error);
-  } finally {
-    setUpdatingId(null); // 🔥 stop loading
-  }
+      console.log(error);
+    } finally {
+      setUpdatingId(null); // 🔥 stop loading
+    }
   };
 
   const removeItem = async (item) => {
@@ -169,8 +169,18 @@ const MyCart = () => {
                 </div>
               ))}
 
-              <div className="mt-6 text-right">
-                <h3 className="text-xl font-bold">Total: ₹{totalPrice}</h3>
+              <div className="mt-6 border-t pt-4">
+                <div className="flex justify-between text-lg font-semibold mb-4">
+                  <span>Total:</span>
+                  <span>₹{totalPrice}</span>
+                </div>
+
+                <button
+                  onClick={() => navigate("/checkout")}
+                  className="w-full py-3 bg-black text-white rounded-lg hover:opacity-90 transition"
+                >
+                  Proceed to Checkout
+                </button>
               </div>
             </>
           )}
