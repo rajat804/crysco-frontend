@@ -97,6 +97,7 @@ const Orders = () => {
                     <th className="px-4 py-3">Order ID</th>
                     <th className="px-4 py-3">User</th>
                     <th className="px-4 py-3">Products</th>
+                    <th className="px-4 py-3">Phone NUmber</th>
                     <th className="px-4 py-3">Address</th>
                     <th className="px-4 py-3">Total</th>
                     <th className="px-4 py-3">Payment</th>
@@ -137,10 +138,14 @@ const Orders = () => {
                           </div>
                         ))}
                       </td>
-
+                        <td>
+                            {order.shippingAddress.phone}
+                        </td>
                       {/* Address */}
                       <td className="px-4 py-3 max-w-[250px] text-xs">
                         {order.shippingAddress?.fullName}
+                        <br />
+                        {order.shippingAddress?.address}
                         <br />
                         {order.shippingAddress?.city}
                         <br />
