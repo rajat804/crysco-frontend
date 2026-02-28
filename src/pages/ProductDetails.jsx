@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
+import BuyNowButton from "../components/BuyNowButton";
 const ProductDetails = () => {
   const { id } = useParams();
   const { fetchCart } = useCart();
@@ -240,12 +241,7 @@ const ProductDetails = () => {
             >
               Add to Cart
             </button>
-            <button
-              onClick={() => alert("Buy Now!")}
-              className="flex-1 py-3 bg-green-500 text-white font-semibold rounded hover:opacity-90 transition"
-            >
-              Buy Now
-            </button>
+            <BuyNowButton product={product}/>
             {product.amazonLink && (
               <a
                 href={product.amazonLink}
