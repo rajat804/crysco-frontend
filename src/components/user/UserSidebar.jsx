@@ -61,9 +61,9 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
           My Cart
         </Link>
 
-        <button className="w-full text-left py-2 hover:text-teal-600">
-          Address Book
-        </button>
+        <Link to="/user/my-orders" onClick={handleLinkClick} className="block py-2 hover:text-teal-600">
+          My Ordes
+        </Link>
 
         <button className="w-full text-left py-2 hover:text-teal-600">
           Account Details
