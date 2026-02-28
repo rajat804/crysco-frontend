@@ -23,6 +23,8 @@ import EditProduct from "./pages/admin/EditProduct";
 import MyCart from "./pages/user/MyCart";
 import UserLayout from "./layouts/UserLayout";
 import Checkout from "./pages/Checkout";
+import MyOrders from "./pages/user/MyOrders";
+import Orders from "./pages/admin/Orders";
 
 function App() {
   return (
@@ -45,6 +47,7 @@ function App() {
         <Route path="/user" element={<UserLayout />}>
           <Route path="dashboard" element={<UserDashboard />} />
           <Route path="mycart" element={<MyCart />} />
+          <Route path="my-orders" element={<MyOrders/>}/>
         </Route>
         {/* ADMIN ROUTES (NO HEADER / FOOTER) */}
         <Route path="/admin" element={<AdminLayout />}>
@@ -56,7 +59,7 @@ function App() {
           <Route path="products-show" element={<ShowProducts />} />
           <Route path="videos" element={<ShowVideos />} />
           <Route path="edit-product/:id" element={<EditProduct />} />
-
+          <Route path="orders" element={<Orders/>}/>
           {/* <Route path="users" element={<Dashboard />} /> */}
         </Route>
 
