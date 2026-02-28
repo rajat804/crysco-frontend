@@ -11,7 +11,7 @@ const BuyNowButton = ({ product }) => {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-black text-white px-6 py-2 rounded-lg"
+        className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
       >
         Buy Now
       </button>
