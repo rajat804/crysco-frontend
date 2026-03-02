@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
 
 const BuyNowModal = ({ product, isOpen, onClose, token, BASE_URL }) => {
   const [size, setSize] = useState("");
@@ -85,7 +86,7 @@ const BuyNowModal = ({ product, isOpen, onClose, token, BASE_URL }) => {
     rzp.open();
   };
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
       <div className="bg-white w-[500px] p-6 rounded-xl shadow-xl relative">
         <button
@@ -185,7 +186,8 @@ const BuyNowModal = ({ product, isOpen, onClose, token, BASE_URL }) => {
           Proceed to Pay
         </button>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
