@@ -25,6 +25,7 @@ import UserLayout from "./layouts/UserLayout";
 import Checkout from "./pages/Checkout";
 import MyOrders from "./pages/user/MyOrders";
 import Orders from "./pages/admin/Orders";
+import CategoryPage from "./pages/CategoryPage";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route path="/customized" element={<Customized />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/category/:categoryName" element={<CategoryPage />} />
         </Route>
         {/* user dashboard route */}
         <Route path="/user" element={<UserLayout />}>
