@@ -15,9 +15,9 @@ const Header = () => {
   }, []);
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Garbage Bags", path: "/garbage-bags" },
-    { name: "Kitchen Towel", path: "/kitchen-towel" },
-    { name: "Kitchen Tissue", path: "/kitchen-tissue" },
+    { name: "Garbage Bags", path: "/category/garbage-bags" },
+    { name: "Kitchen Towel", path: "/category/kitchen-towel" },
+    { name: "Kitchen Tissue", path: "/category/kitchen-tissue" },
     { name: "Bulk Order", path: "/bulk-order" },
     { name: "About Us", path: "/about" },
     { name: "Contact", path: "/contact" },
