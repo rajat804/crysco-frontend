@@ -63,21 +63,29 @@ const ProductDetails = () => {
 
   const handleAddToCart = async () => {
     try {
-      setAdding(true)
+      setAdding(true);
       if (!user) {
         alert("Please login first!");
         navigate("/login");
         return;
       }
 
-      // 🔥 Size validation
-      if (product.sizes && product.sizes.length > 0 && !selectedSize) {
+      // ✅ Size validation
+      if (
+        Array.isArray(product.sizes) &&
+        product.sizes.length > 0 &&
+        !selectedSize
+      ) {
         alert("Please select a size");
         return;
       }
 
-      // 🔥 Color validation
-      if (product.colors && product.colors.length > 0 && !selectedColor) {
+      // ✅ Color validation
+      if (
+        Array.isArray(product.colors) &&
+        product.colors.length > 0 &&
+        !selectedColor
+      ) {
         alert("Please select a color");
         return;
       }
@@ -115,7 +123,7 @@ const ProductDetails = () => {
     } catch (err) {
       console.log(err);
       alert("Error adding to cart");
-    } finally{
+    } finally {
       setAdding(false);
     }
   };
@@ -241,7 +249,7 @@ const ProductDetails = () => {
             >
               Add to Cart
             </button>
-            <BuyNowButton product={product}/>
+            <BuyNowButton product={product} />
             {product.amazonLink && (
               <a
                 href={product.amazonLink}
