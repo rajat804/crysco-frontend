@@ -1,16 +1,27 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BuyNowModal from "./BuyNowModal";
 import { useAuth } from "../context/AuthContext";
 
 const BuyNowButton = ({ product }) => {
   const [open, setOpen] = useState(false);
   const { token } = useAuth();
+  const navigate = useNavigate();
   const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+  const handleBuyClick = () => {
+    if (!token) {
+      alert("Please login first!");
+      navigate("/login");
+      return;
+    }
+    setOpen(true);
+  };
 
   return (
     <>
       <button
-        onClick={() => setOpen(true)}
+        onClick={handleBuyClick}
         className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
       >
         Buy Now
