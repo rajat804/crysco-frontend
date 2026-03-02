@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BuyNowModal = ({ product, isOpen, onClose, token, BASE_URL }) => {
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState(1);
-
+  const navigate = useNavigate();
   const [shippingAddress, setShippingAddress] = useState({
     fullName: "",
     phone: "",
@@ -15,65 +16,74 @@ const BuyNowModal = ({ product, isOpen, onClose, token, BASE_URL }) => {
   if (!isOpen) return null;
 
   const handleBuyNow = async () => {
-  if (!size) return alert("Select size");
+    if (!token) {
+      alert("Please login to continue");
+      navigate("/login"); // ya navigate("/login")
+      return;
+    }
 
-  const res = await fetch(`${BASE_URL}/api/buy-now/create`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({
-      product: {
-        _id: product._id,
-        title: product.title,
-        price: product.salePrice,
-        size,
-        image: product.images[0],
+    // Agar product me sizes exist karte hain tabhi required hoga
+    if (product.sizes && product.sizes.length > 0 && !size) {
+      return alert("Select size");
+    }
+
+    const res = await fetch(`${BASE_URL}/api/buy-now/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      quantity,
-    }),
-  });
-
-  const data = await res.json();
-
-  const options = {
-    key: data.key, // ✅ backend se aa rahi
-    amount: data.amount,
-    currency: data.currency,
-    order_id: data.orderId,
-    name: "Monster Store",
-    description: "Buy Now Payment",
-
-    handler: async function (response) {
-      await fetch(`${BASE_URL}/api/buy-now/verify`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      body: JSON.stringify({
+        product: {
+          _id: product._id,
+          title: product.title,
+          price: product.salePrice,
+          size,
+          image: product.images[0],
         },
-        body: JSON.stringify({
-          ...response,
-          product: {
-            _id: product._id,
-            title: product.title,
-            price: product.salePrice,
-            size,
-            image: product.images[0],
+        quantity,
+      }),
+    });
+
+    const data = await res.json();
+
+    const options = {
+      key: data.key, // ✅ backend se aa rahi
+      amount: data.amount,
+      currency: data.currency,
+      order_id: data.orderId,
+      name: "Monster Store",
+      description: "Buy Now Payment",
+
+      handler: async function (response) {
+        await fetch(`${BASE_URL}/api/buy-now/verify`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
-          quantity,
-          shippingAddress,
-        }),
-      });
+          body: JSON.stringify({
+            ...response,
+            product: {
+              _id: product._id,
+              title: product.title,
+              price: product.salePrice,
+              size,
+              image: product.images[0],
+            },
+            quantity,
+            shippingAddress,
+          }),
+        });
 
-      alert("Order Placed Successfully");
-      window.location.href = "/my-orders";
-    },
+        alert("Order Placed Successfully");
+        window.location.href = "/my-orders";
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
   };
-
-  const rzp = new window.Razorpay(options);
-  rzp.open();
-};
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
@@ -92,17 +102,20 @@ const BuyNowModal = ({ product, isOpen, onClose, token, BASE_URL }) => {
         <p className="font-semibold">{product.title}</p>
         <p className="text-lg font-bold mb-4">₹{product.salePrice}</p>
 
-        {/* Size */}
-        <select
-          value={size}
-          onChange={(e) => setSize(e.target.value)}
-          className="w-full border p-2 rounded mb-3"
-        >
-          <option value="">Select Size</option>
-          {product.sizes.map((s, i) => (
-            <option key={i}>{s}</option>
-          ))}
-        </select>
+        {product.sizes && product.sizes.length > 0 && (
+          <select
+            value={size}
+            onChange={(e) => setSize(e.target.value)}
+            className="w-full border p-2 rounded mb-3"
+          >
+            <option value="">Select Size</option>
+            {product.sizes.map((s, i) => (
+              <option key={i} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+        )}
 
         {/* Quantity */}
         <input
