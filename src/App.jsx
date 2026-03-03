@@ -27,6 +27,7 @@ import MyOrders from "./pages/user/MyOrders";
 import Orders from "./pages/admin/Orders";
 import CategoryPage from "./pages/CategoryPage";
 import AllProduct from "./pages/AllProduct";
+import Bulk from "./pages/admin/Bulk";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="products-video" element={<ProductVideo />} />
           <Route path="products" element={<Products />} />
+          <Route path="bulk" element={<Bulk />} />
           <Route path="products-show" element={<ShowProducts />} />
           <Route path="videos" element={<ShowVideos />} />
           <Route path="edit-product/:id" element={<EditProduct />} />
