@@ -28,6 +28,9 @@ import Orders from "./pages/admin/Orders";
 import CategoryPage from "./pages/CategoryPage";
 import AllProduct from "./pages/AllProduct";
 import Bulk from "./pages/admin/Bulk";
+import ShowBulkProduct from "./pages/admin/ShowBulkProduct";
+import BulkEditProduct from "./pages/admin/BulkEditProduct";
+import BulkProductDetails from "./pages/BulkProductDetails";
 
 function App() {
   return (
@@ -42,6 +45,7 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/bulk-product/:id" element={<BulkProductDetails />} />
           <Route path="/customized" element={<Customized />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -62,6 +66,8 @@ function App() {
           <Route path="products-video" element={<ProductVideo />} />
           <Route path="products" element={<Products />} />
           <Route path="bulk" element={<Bulk />} />
+          <Route path="bulk-products-show" element={<ShowBulkProduct/>}/>
+          <Route path="bulk-edit-product/:id" element={<BulkEditProduct />} />
           <Route path="products-show" element={<ShowProducts />} />
           <Route path="videos" element={<ShowVideos />} />
           <Route path="edit-product/:id" element={<EditProduct />} />
