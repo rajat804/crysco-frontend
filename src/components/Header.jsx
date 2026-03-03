@@ -11,13 +11,14 @@ const Header = () => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    setToken(localStorage.getItem("token"));
+    setToken(sessionStorage.getItem("token"));
   }, []);
   const navItems = [
     { name: "Home", path: "/" },
     { name: "Garbage Bags", path: "/category/garbage-bags" },
     { name: "Kitchen Towel", path: "/category/kitchen-towel" },
     { name: "Kitchen Tissue", path: "/category/kitchen-tissue" },
+    { name: "All Product", path: "/all-product" },
     { name: "Bulk Order", path: "/bulk-order" },
     { name: "About Us", path: "/about" },
     { name: "Contact", path: "/contact" },
