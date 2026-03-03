@@ -1,13 +1,20 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import UserSidebar from "../components/user/UserSidebar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
 const UserLayout = () => {
-  const { logout } = useAuth();
+  const {  token, logout } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
+
+  // 🔹 Redirect if not logged in
+  useEffect(() => {
+    if (!token) {
+      navigate("/login", { replace: true });
+    }
+  }, [token]);
 
   const handleLogout = () => {
     logout();
