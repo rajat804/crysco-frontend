@@ -20,60 +20,79 @@ const AdminSidebar = ({ setSidebarOpen }) => {
 
   return (
     <div className="w-64 h-full bg-slate-900 p-5 flex flex-col justify-between">
-
       <div>
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-emerald-500">
-            Admin Panel
-          </h2>
+          <h2 className="text-2xl font-bold text-emerald-500">Admin Panel</h2>
 
-          <button
-            className="md:hidden"
-            onClick={() => setSidebarOpen(false)}
-          >
+          <button className="md:hidden" onClick={() => setSidebarOpen(false)}>
             <X size={22} />
           </button>
         </div>
 
-        <NavLink to="/admin/dashboard" className={({ isActive }) =>
-          `${linkStyle} ${
-            isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
-          }`
-        }>
+        <NavLink
+          to="/admin/dashboard"
+          className={({ isActive }) =>
+            `${linkStyle} ${
+              isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
+            }`
+          }
+        >
           <LayoutDashboard size={20} />
           Dashboard
         </NavLink>
-        <NavLink to="/admin/products-video" className={({ isActive }) =>
-          `${linkStyle} ${
-            isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
-          }`
-        }>
+        <NavLink
+          to="/admin/products-video"
+          className={({ isActive }) =>
+            `${linkStyle} ${
+              isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
+            }`
+          }
+        >
           <Package size={20} />
           Add Product Video
         </NavLink>
-        <NavLink to="/admin/products" className={({ isActive }) =>
-          `${linkStyle} ${
-            isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
-          }`
-        }>
+        <NavLink
+          to="/admin/products"
+          className={({ isActive }) =>
+            `${linkStyle} ${
+              isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
+            }`
+          }
+        >
           <Package size={20} />
           Products
         </NavLink>
-
-        <NavLink to="/admin/orders" className={({ isActive }) =>
-          `${linkStyle} ${
-            isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
-          }`
-        }>
+        <NavLink
+          to="/admin/bulk"
+          className={({ isActive }) =>
+            `${linkStyle} ${
+              isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
+            }`
+          }
+        >
+          <Package size={20} />
+          Bulk Product
+        </NavLink>
+        <NavLink
+          to="/admin/orders"
+          className={({ isActive }) =>
+            `${linkStyle} ${
+              isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
+            }`
+          }
+        >
           <ShoppingCart size={20} />
           Orders
         </NavLink>
 
-        <NavLink to="/admin/users" className={({ isActive }) =>
-          `${linkStyle} ${
-            isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
-          }`
-        }>
+        <NavLink
+          to="/admin/users"
+          className={({ isActive }) =>
+            `${linkStyle} ${
+              isActive ? "bg-slate-700 text-emerald-400" : "hover:bg-slate-800"
+            }`
+          }
+        >
           <Users size={20} />
           Users
         </NavLink>
@@ -86,7 +105,6 @@ const AdminSidebar = ({ setSidebarOpen }) => {
         <LogOut size={18} />
         Logout
       </button>
-
     </div>
   );
 };
