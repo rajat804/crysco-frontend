@@ -35,6 +35,7 @@ const Checkout = () => {
 
     if (!token) {
       alert("Please login again");
+      navigate("/login", { replace: true });
       return;
     }
 
