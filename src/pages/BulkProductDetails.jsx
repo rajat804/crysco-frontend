@@ -73,58 +73,103 @@ const BulkProductDetails = () => {
   };
 
   // ================= PAYMENT =================
-  const handleRazorpayPayment = async () => {
-    if (
-      !formData.fullName ||
-      !formData.phone ||
-      !formData.address ||
-      !formData.city ||
-      !formData.pincode
-    ) {
-      alert("Please fill all details");
+const handleRazorpayPayment = async () => {
+  if (!token) {
+    alert("Please login first");
+    navigate("/login");
+    return;
+  }
+
+  if (
+    !formData.fullName ||
+    !formData.phone ||
+    !formData.address ||
+    !formData.city ||
+    !formData.pincode
+  ) {
+    alert("Please fill all details");
+    return;
+  }
+
+  try {
+
+    // 1️⃣ Create Razorpay Order
+    const res = await fetch(`${BASE_URL}/api/bulk-payment/create-order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        amount: selectedVariant.salePrice,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!data.orderId) {
+      alert("Order creation failed");
       return;
     }
 
-    try {
-      const res = await fetch(`${BASE_URL}/api/payment/create-order`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          amount: selectedVariant.salePrice,
-        }),
-      });
+    const options = {
+      key: data.key,
+      amount: data.amount,
+      currency: data.currency,
+      order_id: data.orderId,
 
-      const order = await res.json();
+      name: "Monster Store",
+      description: product.title,
 
-      const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY,
-        amount: order.amount,
-        currency: "INR",
-        name: "Your Company Name",
-        description: product.title,
-        order_id: order.id,
-        handler: function () {
-          alert("Payment Successful 🎉");
-          setShowCheckout(false);
-          navigate("/order-success");
-        },
-        prefill: {
-          name: formData.fullName,
-          contact: formData.phone,
-        },
-        theme: { color: "#059669" },
-      };
+      handler: async function (response) {
 
-      const rzp = new window.Razorpay(options);
-      rzp.open();
-    } catch (err) {
-      console.error(err);
-      alert("Payment Failed");
-    }
-  };
+        // 2️⃣ Verify Payment + Create Order
+        await fetch(`${BASE_URL}/api/bulk-payment/verify`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+
+            product: {
+              _id: product._id,
+              title: product.title,
+              price: selectedVariant.salePrice,
+              size: selectedVariant.pack || null,
+              image: product.images[0],
+            },
+
+            shippingAddress: formData,
+          }),
+        });
+
+        alert("Order Placed Successfully 🎉");
+
+        navigate("/my-orders");
+      },
+
+      prefill: {
+        name: formData.fullName,
+        contact: formData.phone,
+      },
+
+      theme: {
+        color: "#059669",
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+
+  } catch (error) {
+    console.error(error);
+    alert("Payment Failed");
+  }
+};
 
   if (loading) return <div className="text-center py-20">Loading...</div>;
   if (!product) return <div className="text-center py-20">Product not found</div>;
