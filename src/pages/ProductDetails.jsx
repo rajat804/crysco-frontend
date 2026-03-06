@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import BuyNowButton from "../components/BuyNowButton";
 import ProductCard from "../components/ProductCard";
+import ProductVideoSlider from "../components/ProductVideoSlider";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -24,39 +25,37 @@ const ProductDetails = () => {
   const { user, token } = useAuth();
 
   useEffect(() => {
-  const fetchProductAndRelated = async () => {
-    try {
-      // 1️⃣ Fetch current product
-      const res = await fetch(`${BASE_URL}/api/products/${id}`);
-      const data = await res.json();
+    const fetchProductAndRelated = async () => {
+      try {
+        // 1️⃣ Fetch current product
+        const res = await fetch(`${BASE_URL}/api/products/${id}`);
+        const data = await res.json();
 
-      setProduct(data);
-      setMainImage(data.images?.[0] || "");
+        setProduct(data);
+        setMainImage(data.images?.[0] || "");
 
-      if (data.sizes?.length) setSelectedSize(data.sizes[0]);
-      if (data.colors?.length) setSelectedColor(data.colors[0]);
+        if (data.sizes?.length) setSelectedSize(data.sizes[0]);
+        if (data.colors?.length) setSelectedColor(data.colors[0]);
 
-      // 2️⃣ Fetch related products (same category)
-      if (data.category) {
-        const relatedRes = await fetch(
-          `${BASE_URL}/api/products?category=${data.category}`
-        );
-        const relatedData = await relatedRes.json();
+        // 2️⃣ Fetch related products (same category)
+        if (data.category) {
+          const relatedRes = await fetch(
+            `${BASE_URL}/api/products?category=${data.category}`,
+          );
+          const relatedData = await relatedRes.json();
 
-        // Current product remove karo
-        const filtered = relatedData.filter(
-          (item) => item._id !== data._id
-        );
+          // Current product remove karo
+          const filtered = relatedData.filter((item) => item._id !== data._id);
 
-        setRelatedProducts(filtered.slice(0, 4)); // max 4 show
+          setRelatedProducts(filtered.slice(0, 4)); // max 4 show
+        }
+      } catch (err) {
+        console.log("Error:", err);
       }
-    } catch (err) {
-      console.log("Error:", err);
-    }
-  };
+    };
 
-  fetchProductAndRelated();
-}, [id]);
+    fetchProductAndRelated();
+  }, [id]);
 
   const increaseQuantity = () => setQuantity((q) => q + 1);
   const decreaseQuantity = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
@@ -157,7 +156,7 @@ const ProductDetails = () => {
             <img
               src={mainImage}
               alt={product.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full"
             />
           </div>
           <div className="flex gap-4 mt-4 overflow-x-auto">
@@ -393,18 +392,23 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      {/* Related Products */}
-{relatedProducts.length > 0 && (
-  <div className="mt-12">
-    <h2 className="text-2xl font-bold mb-6">Related Products</h2>
 
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-      {relatedProducts.map((rp) => (
-        <ProductCard key={rp._id} product={rp} />
-      ))}
-    </div>
-  </div>
-)}
+      {/* product video */}
+        <ProductVideoSlider category={product.category} />
+
+
+      {/* Related Products */}
+      {relatedProducts.length > 0 && (
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold mb-6">Related Products</h2>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            {relatedProducts.map((rp) => (
+              <ProductCard key={rp._id} product={rp} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
