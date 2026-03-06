@@ -7,6 +7,7 @@ import AmazingDeals from "../components/AmazingDeals";
 import CustomerFeedback from "../components/CustomerFeedback";
 import PromoCTA from "../components/PromoCTA";
 import Footer from "../components/Footer";
+import HomeCategoryVideos from "../components/HomeCategoryVideos";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <TrustSection/>
       <AmazingDeals/>
       <NewArrivals/>
+      <HomeCategoryVideos category="garbage bags" />
       <PromoSection/>
       <CustomerFeedback/>
       <PromoCTA/>
