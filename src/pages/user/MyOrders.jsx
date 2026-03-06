@@ -48,11 +48,13 @@ const MyOrders = () => {
 
         const data = await res.json();
 
-        const sorted = data.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        );
+        if (Array.isArray(data)) {
+          const sorted = data.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+          );
 
-        setOrders(sorted);
+          setOrders(sorted);
+        }
       } catch (err) {
         console.error(err);
       }
@@ -63,26 +65,23 @@ const MyOrders = () => {
 
   const cancelOrder = async (orderId) => {
     const confirmCancel = window.confirm(
-      "Are you sure you want to cancel this order?"
+      "Are you sure you want to cancel this order?",
     );
     if (!confirmCancel) return;
 
     try {
-      const res = await fetch(
-        `${BASE_URL}/api/orders/cancel/${orderId}`,
-        {
-          method: "PUT",
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const res = await fetch(`${BASE_URL}/api/orders/cancel/${orderId}`, {
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       if (res.ok) {
         setOrders((prev) =>
           prev.map((order) =>
             order._id === orderId
               ? { ...order, orderStatus: "Cancelled" }
-              : order
-          )
+              : order,
+          ),
         );
       }
     } catch (err) {
@@ -108,19 +107,16 @@ const MyOrders = () => {
               {/* Header */}
               <div className="flex justify-between items-center mb-4">
                 <div>
+                  <p className="text-sm text-gray-500">Order ID: {order._id}</p>
                   <p className="text-sm text-gray-500">
-                    Order ID: {order._id}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Date:{" "}
-                    {new Date(order.createdAt).toLocaleDateString()}
+                    Date: {new Date(order.createdAt).toLocaleDateString()}
                   </p>
                 </div>
 
                 <div className="text-right">
                   <span
                     className={`px-4 py-1 rounded-full text-sm font-semibold ${getStatusColor(
-                      order.orderStatus
+                      order.orderStatus,
                     )}`}
                   >
                     {order.orderStatus}
@@ -203,9 +199,7 @@ const MyOrders = () => {
                     </p>
                   </div>
 
-                  <p className="font-semibold">
-                    ₹{item.price * item.quantity}
-                  </p>
+                  <p className="font-semibold">₹{item.price * item.quantity}</p>
                 </div>
               ))}
 
@@ -229,7 +223,6 @@ const MyOrders = () => {
           );
         })
       )}
-      
     </div>
   );
 };
