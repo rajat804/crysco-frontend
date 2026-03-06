@@ -164,8 +164,9 @@ const EditProduct = () => {
       method: "PUT",
       body: data,
     });
-
+    console.log(res);
     const result = await res.json();
+    console.log(result);
     setLoading(false);
 
     if (!res.ok) return alert(result.message);
@@ -359,6 +360,7 @@ const EditProduct = () => {
           <input
             type="file"
             multiple
+            accept="image/*"
             onChange={handleImageChange}
             className="w-full p-3 bg-slate-800 rounded-lg"
           />
