@@ -10,34 +10,35 @@ const Orders = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const res = await fetch(
-          `${BASE_URL}/api/orders/admin/all-orders`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
 
-        const data = await res.json();
+  const fetchOrders = async () => {
 
-        if (res.ok && Array.isArray(data)) {
-          setOrders(data);
-        } else {
-          setOrders([]);
-        }
-      } catch (error) {
-        console.error(error);
+    try {
+
+      const res = await fetch(
+        `${BASE_URL}/api/orders/admin/all-orders`
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setOrders(data);
+      } else {
         setOrders([]);
-      } finally {
-        setLoading(false);
       }
-    };
 
-    if (token) fetchOrders();
-  }, [token, BASE_URL]);
+    } catch (error) {
+      console.error(error);
+      setOrders([]);
+    } finally {
+      setLoading(false);
+    }
+
+  };
+
+  fetchOrders();
+
+}, []);
 
   const updateStatus = async (id, newStatus) => {
     try {
