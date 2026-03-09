@@ -39,9 +39,10 @@ const HomeCategoryVideos = ({ category }) => {
                 <div key={index} className="rounded-xl overflow-hidden shadow">
                   <video
                     src={video}
-                    controls
+                    autoPlay
                     muted
                     loop
+                    playsInline
                     className="w-full h-[260px] object-cover"
                   />
                 </div>
