@@ -8,7 +8,9 @@ const Footer = () => {
         <div>
           <h2 className="text-2xl font-bold text-emerald-700">Crysco</h2>
           <p className="mt-4 text-gray-600 leading-relaxed">
-            Crysco India specializes in manufacturing high-quality garbage bags and biohazard waste bags designed for safe, hygienic, and efficient waste disposal across hotels, hospitals, offices, and households.
+            Crysco India specializes in manufacturing high-quality garbage bags
+            and biohazard waste bags designed for safe, hygienic, and efficient
+            waste disposal across hotels, hospitals, offices, and households.
           </p>
 
           {/* Social Icons */}
@@ -27,7 +29,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
         {/* Quick Links */}
         <div>
           <h3 className="text-lg font-semibold text-emerald-700 mb-4">
@@ -38,17 +39,22 @@ const Footer = () => {
               Home
             </li>
             <li className="hover:text-emerald-600 cursor-pointer transition">
-              Shop
+              Garbage Bags
             </li>
             <li className="hover:text-emerald-600 cursor-pointer transition">
-              New Arrivals
+              Kitchen Towel
+            </li>
+            <li className="hover:text-emerald-600 cursor-pointer transition">
+              Kitchen Tissue
+            </li>
+            <li className="hover:text-emerald-600 cursor-pointer transition">
+              Bulk Order
             </li>
             <li className="hover:text-emerald-600 cursor-pointer transition">
               Contact
             </li>
           </ul>
         </div>
-
         {/* Categories */}
         <div>
           <h3 className="text-lg font-semibold text-emerald-700 mb-4">
@@ -67,7 +73,6 @@ const Footer = () => {
             {/* <li className="hover:text-emerald-600 cursor-pointer transition">Accessories</li> */}
           </ul>
         </div>
-
         {/* Contact Info */}
         <div>
           <h3 className="text-lg font-semibold text-emerald-700 mb-4">
