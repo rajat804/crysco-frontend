@@ -2,9 +2,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const messages = [
-  "🚚 Free Shipping on Orders Above ₹999",
-  "🔥 Flat 20% Off on Wellness Products",
-  "💊 Trusted by 10,000+ Happy Customers",
+  // "🚚 Free Shipping on Orders Above ₹999",
+  // "🔥 Flat 20% Off on Wellness Products",
+  // "💊 Trusted by 10,000+ Happy Customers",
+  "🚚 Instant delivery on Order Above ₹2000 in Delhi/NCR",
+  "🔥 Flat 10% Off on First Order",
+  " Trusted by 10,000+ Happy Customers",
+  "🌿 Better Health Starts Here",
+  "💊 Premium Quality Wellness Products",
+  "💚 Trusted by Thousands of Happy Customers",
 ];
 
 const TopBar = () => {
